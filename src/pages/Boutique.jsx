@@ -18,18 +18,17 @@ function Boutique() {
 
   const loading = catLoading || prodLoading
 
-  // DEBUG: remove after confirming Arabic works
-  console.log('[Boutique] i18n.language:', i18n.language, '| isArabic:', isArabic(i18n.language), '| categories:', categories.map(c => ({ name: c.name, name_ar: c.name_ar })))
+  const getCategoryKey = (cat) => String(cat.slug || cat.id)
 
   // Find the active category object to match by name too
-  const activeCatObj = categories.find(c => (c.slug || c.id) === activeCategory)
+  const activeCatObj = categories.find(c => getCategoryKey(c) === String(activeCategory))
   
   const filteredProducts = activeCategory === 'tous' 
     ? products 
     : products.filter(p => {
         // Match by slug or id
-        if (p.category === activeCategory) return true
-        if (p.category_slug === activeCategory) return true
+        if (String(p.category) === String(activeCategory)) return true
+        if (String(p.category_slug) === String(activeCategory)) return true
         // Match by category name (handles API vs static mismatch)
         if (activeCatObj && p.category_name === activeCatObj.name) return true
         return false
@@ -54,8 +53,8 @@ function Boutique() {
           <div className="boutique-categories stagger">
             {categories.map(category => (
               <Link 
-                key={category.slug || category.id}
-                to={`/boutique/${category.slug || category.id}`}
+                key={getCategoryKey(category)}
+                to={`/boutique/${getCategoryKey(category)}`}
                 className="boutique-category-card"
               >
                 <div className="boutique-category-image">
@@ -97,9 +96,9 @@ function Boutique() {
             </button>
             {categories.map(cat => (
               <button 
-                key={cat.slug || cat.id}
-                className={`filter-tab ${activeCategory === (cat.slug || cat.id) ? 'active' : ''}`}
-                onClick={() => setActiveCategory(cat.slug || cat.id)}
+                key={getCategoryKey(cat)}
+                className={`filter-tab ${String(activeCategory) === getCategoryKey(cat) ? 'active' : ''}`}
+                onClick={() => setActiveCategory(getCategoryKey(cat))}
               >
                 {getCatName(cat, i18n.language)}
               </button>

@@ -219,9 +219,15 @@ export function useProduct(slug) {
 // ============================================
 
 export function useCategoryProducts(categorySlug) {
+  const normalizedCategorySlug = String(categorySlug);
+
   // Find static category and products
-  const staticCategory = staticCategories.find(c => c.id === categorySlug || c.slug === categorySlug);
-  const staticCategoryProducts = staticProducts.filter(p => p.category === categorySlug);
+  const staticCategory = staticCategories.find(c =>
+    String(c.id) === normalizedCategorySlug || String(c.slug) === normalizedCategorySlug
+  );
+  const staticCategoryProducts = staticProducts.filter(
+    p => String(p.category) === normalizedCategorySlug
+  );
 
   const [category, setCategory] = useState(staticCategory || null);
   const [products, setProducts] = useState(staticCategoryProducts);
@@ -229,10 +235,14 @@ export function useCategoryProducts(categorySlug) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!categorySlug) return;
+    if (!normalizedCategorySlug) return;
 
     async function load() {
       setLoading(true);
+      setError(null);
+      // Immediately sync UI to the newly selected category so header background updates
+      setCategory(staticCategory || null);
+      setProducts(staticCategoryProducts);
       try {
         // Fetch ALL API categories and ALL API products
         const [apiCategories, apiProducts] = await Promise.all([
@@ -242,8 +252,8 @@ export function useCategoryProducts(categorySlug) {
 
         // Find the matching API category by slug, id, or name
         const apiCategory = apiCategories.find(c => 
-          c.slug === categorySlug || 
-          String(c.id) === categorySlug ||
+          String(c.slug) === normalizedCategorySlug || 
+          String(c.id) === normalizedCategorySlug ||
           c.name?.toLowerCase() === staticCategory?.name?.toLowerCase()
         );
 
@@ -256,10 +266,14 @@ export function useCategoryProducts(categorySlug) {
         // Match by: category_slug, category_name, or the API category's slug/id
         const matchingApiProducts = apiProducts.filter(p => {
           // Direct slug match
-          if (p.category_slug === categorySlug || p.category === categorySlug) return true;
+          if (
+            String(p.category_slug) === normalizedCategorySlug ||
+            String(p.category) === normalizedCategorySlug
+          ) return true;
           // Match via API category
           if (apiCategory) {
-            if (p.category_slug === apiCategory.slug) return true;
+            if (String(p.category_slug) === String(apiCategory.slug)) return true;
+            if (String(p.category) === String(apiCategory.id)) return true;
             if (p.category_name === apiCategory.name) return true;
           }
           // Match via static category name
@@ -272,7 +286,7 @@ export function useCategoryProducts(categorySlug) {
         setProducts(merged);
 
       } catch (err) {
-        console.log(`Error fetching category ${categorySlug}, using static data`);
+        console.log(`Error fetching category ${normalizedCategorySlug}, using static data`);
         setError(err);
         // Keep static data (already set as initial state)
       } finally {
@@ -280,7 +294,7 @@ export function useCategoryProducts(categorySlug) {
       }
     }
     load();
-  }, [categorySlug]);
+  }, [normalizedCategorySlug]);
 
   return { category, products, loading, error };
 }

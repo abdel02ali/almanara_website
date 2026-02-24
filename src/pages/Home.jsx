@@ -173,7 +173,7 @@ function Home() {
           </div>
           <div className="occasions-home-grid">
             <div className="occasions-home-card">
-              <img src="https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?w=500&q=75&auto=format&fit=crop" alt={t('home.weddingsCake')} loading="lazy" width="500" height="375" />
+              <img src="/pictures/wed.jpeg" alt={t('home.weddingsCake')} loading="lazy" width="500" height="375" />
               <div className="occasions-home-overlay">
                 <h3>{t('home.weddingsCake')}</h3>
               </div>

@@ -9,7 +9,7 @@ export const products = [
     description: 'Notre baguette tradition au levain naturel, croûte croustillante et mie alvéolée.',
     price: 1.40,
     category: 'pain',
-    image: 'https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=400&h=300&fit=crop&q=75&auto=format',
+    image: '/pictures/bag.jpeg',
     badge: 'Signature'
   },
   {
@@ -54,7 +54,7 @@ export const products = [
     description: 'Crêpe feuilletée marocaine, croustillante et fondante, idéale pour le petit-déjeuner.',
     price: 1.50,
     category: 'traditionnel',
-    image: 'https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=400&h=300&fit=crop&q=75&auto=format',
+    image: '/pictures/msemen.jpeg',
     badge: 'Best-seller'
   },
   {
@@ -79,7 +79,7 @@ export const products = [
     description: 'Pâtisserie en forme de croissant garnie de pâte d\'amande parfumée à la fleur d\'oranger.',
     price: 2.50,
     category: 'traditionnel',
-    image: 'https://images.unsplash.com/photo-1558636508-e0db3814bd1d?w=400&h=300&fit=crop&q=75&auto=format',
+    image: '/pictures/ghzal.jpeg',
     badge: 'Signature'
   },
   {
