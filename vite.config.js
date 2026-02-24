@@ -38,10 +38,6 @@ export default defineConfig({
             './src/locales/en.json'
           ]
         }
-      },
-      treeshake: {
-        // More aggressive tree-shaking
-        moduleSideEffects: false
       }
     }
   }
