@@ -1,0 +1,937 @@
+:root {
+  /* ========================================
+     DEFAULT THEME - Luxury Dark Rose Gold
+     ======================================== */
+  --color-bg-primary: #0D0D0D;
+  --color-bg-secondary: #1A1A1A;
+  --color-bg-card: #232323;
+  --color-bg-elevated: #2D2D2D;
+
+  /* Rose Gold / Copper Accents */
+  --color-rose-gold: #B76E79;
+  --color-rose-gold-light: #D4A5A5;
+  --color-copper: #C97C5D;
+  --color-champagne: #F7E7CE;
+
+  /* Text Colors */
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #B3B3B3;
+  --color-text-muted: #666666;
+
+  /* Accent Colors */
+  --color-emerald: #2D5A4B;
+  --color-burgundy: #722F37;
+  --color-ivory: #FFFFF0;
+
+  /* Theme-specific (default values) */
+  --color-midnight: #1A1A1A;
+  --color-purple-deep: #232323;
+  --color-gold: #B76E79;
+  --color-gold-light: #D4A5A5;
+  --color-star: #F7E7CE;
+
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+  --space-5xl: 8rem;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 40px rgba(183, 110, 121, 0.3);
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slower: 800ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================
+   RAMADAN THEME - Midnight & Gold
+   ======================================== */
+[data-theme="ramadan"] {
+  --color-bg-primary: #0a0a1a;
+  --color-bg-secondary: #12122a;
+  --color-bg-card: #1a1a3a;
+  --color-bg-elevated: #252550;
+
+  /* Ramadan Gold & Amber Accents */
+  --color-rose-gold: #D4AF37;
+  --color-rose-gold-light: #F4D03F;
+  --color-copper: #E8A838;
+  --color-champagne: #FFF8DC;
+
+  /* Text Colors */
+  --color-text-secondary: #C5C5E0;
+  --color-text-muted: #7070A0;
+
+  /* Ramadan Accent Colors */
+  --color-emerald: #1B5E20;
+  --color-burgundy: #6A1B4D;
+
+  /* Additional Ramadan Colors */
+  --color-midnight: #1a1a3a;
+  --color-purple-deep: #2D1B4E;
+  --color-gold: #D4AF37;
+  --color-gold-light: #FFD700;
+  --color-star: #FFF8DC;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(3rem, 8vw, 6rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+h4 {
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+}
+
+p {
+  margin-bottom: var(--space-md);
+  color: var(--color-text-secondary);
+}
+
+a {
+  color: var(--color-rose-gold-light);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-champagne);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input,
+textarea,
+select {
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+
+/* Utility Classes */
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+}
+
+.section {
+  padding: var(--space-5xl) 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-rose {
+  color: var(--color-rose-gold);
+}
+
+.text-champagne {
+  color: var(--color-champagne);
+}
+
+/* Button Styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-2xl);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 0;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: var(--color-rose-gold);
+  color: var(--color-bg-primary);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left var(--transition-slow);
+}
+
+.btn-primary:hover {
+  background: var(--color-rose-gold-light);
+  color: var(--color-bg-primary);
+  transform: translateY(-2px);
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-text-primary);
+}
+
+.btn-secondary:hover {
+  background: var(--color-text-primary);
+  color: var(--color-bg-primary);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-rose-gold-light);
+  padding: var(--space-sm) 0;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.btn-ghost:hover {
+  color: var(--color-champagne);
+}
+
+.btn-sm {
+  padding: var(--space-sm) var(--space-lg);
+  font-size: 0.75rem;
+}
+
+.btn-lg {
+  padding: var(--space-lg) var(--space-3xl);
+  font-size: 0.9rem;
+}
+
+/* Card Styles */
+.card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all var(--transition-base);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: var(--space-lg);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: var(--space-sm);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.form-input {
+  width: 100%;
+  padding: var(--space-md) var(--space-lg);
+  border: 1px solid var(--color-bg-elevated);
+  border-radius: 0;
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  transition: all var(--transition-fast);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-rose-gold);
+  background: var(--color-bg-card);
+}
+
+.form-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.form-textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-xs) var(--space-md);
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.badge-rose {
+  background: var(--color-rose-gold);
+  color: var(--color-bg-primary);
+}
+
+.badge-copper {
+  background: var(--color-copper);
+  color: var(--color-bg-primary);
+}
+
+.badge-emerald {
+  background: var(--color-emerald);
+  color: var(--color-champagne);
+}
+
+/* Grid System */
+.grid {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1024px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+
+  .grid-4,
+  .grid-3,
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Page Header */
+.page-header {
+  text-align: center;
+  padding: var(--space-5xl) 0 var(--space-3xl);
+  position: relative;
+  background: var(--color-bg-secondary);
+}
+
+.page-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 1px;
+  background: var(--color-rose-gold);
+}
+
+.page-header h1 {
+  margin-bottom: var(--space-md);
+}
+
+.page-header p {
+  max-width: 500px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+}
+
+/* Section Header */
+.section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto var(--space-4xl);
+}
+
+.section-subtitle {
+  display: inline-block;
+  color: var(--color-rose-gold);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-md);
+}
+
+.section-header p {
+  font-size: 1.1rem;
+}
+
+/* Decorative Line */
+.deco-line {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-rose-gold), transparent);
+  margin: var(--space-xl) auto;
+}
+
+/* Animation Classes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn var(--transition-slow) ease forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp var(--transition-slow) ease forwards;
+}
+
+/* Stagger animations — only animate when visible (reduced motion safe) */
+.stagger>* {
+  opacity: 0;
+  animation: fadeInUp 0.7s ease forwards;
+}
+
+.stagger>*:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.stagger>*:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.stagger>*:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.stagger>*:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.stagger>*:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.stagger>*:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+/* ========================================
+   Reduced Motion (Accessibility)
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ========================================
+   Performance: GPU Hints & Containment
+   ======================================== */
+.hero-image,
+.product-image img,
+.category-image img,
+.custom-bg img {
+  will-change: transform;
+}
+
+.product-card,
+.category-showcase-card,
+.blog-card,
+.value-item,
+.info-card {
+  contain: layout style;
+}
+
+.section {
+  contain: layout style;
+}
+
+/* Price Display */
+.price {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-champagne);
+}
+
+.price-old {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+  margin-right: var(--space-sm);
+}
+
+/* Geometric Decorations */
+.geo-pattern {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.03;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-rose-gold);
+  border-radius: var(--radius-full);
+}
+
+/* Selection */
+::selection {
+  background: var(--color-rose-gold);
+  color: var(--color-bg-primary);
+}
+
+/* ========================================
+   RAMADAN THEME DECORATIONS
+   ======================================== */
+
+/* Twinkling Stars Animation */
+@keyframes twinkle {
+
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes float-lantern {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+
+  50% {
+    transform: translateY(-15px) rotate(2deg);
+  }
+}
+
+@keyframes glow-pulse {
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 5px var(--color-gold));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 20px var(--color-gold-light));
+  }
+}
+
+@keyframes crescent-glow {
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+    transform: rotate(-15deg);
+  }
+
+  50% {
+    filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.8));
+    transform: rotate(-12deg);
+  }
+}
+
+/* Stars Background */
+.ramadan-stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--color-star);
+  border-radius: 50%;
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+.star::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 2px;
+  height: 8px;
+  background: inherit;
+  border-radius: 2px;
+}
+
+.star::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(90deg);
+  width: 2px;
+  height: 8px;
+  background: inherit;
+  border-radius: 2px;
+}
+
+/* Floating Lantern */
+.lantern {
+  position: fixed;
+  z-index: 1;
+  pointer-events: none;
+  animation: float-lantern 4s ease-in-out infinite;
+}
+
+.lantern svg {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+.lantern-left {
+  top: 15%;
+  left: 5%;
+  animation-delay: 0s;
+}
+
+.lantern-right {
+  top: 20%;
+  right: 5%;
+  animation-delay: 1s;
+}
+
+/* Crescent Moon */
+.crescent-moon {
+  position: fixed;
+  top: 10%;
+  right: 10%;
+  z-index: 1;
+  pointer-events: none;
+  animation: crescent-glow 4s ease-in-out infinite;
+}
+
+/* Ramadan Banner */
+.ramadan-banner {
+  background: linear-gradient(135deg, var(--color-purple-deep) 0%, var(--color-midnight) 50%, var(--color-purple-deep) 100%);
+  padding: var(--space-lg) 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+  margin-top: 80px;
+}
+
+@media (max-width: 480px) {
+  .ramadan-banner {
+    margin-top: 64px;
+    padding: var(--space-md) 0;
+  }
+
+  .ramadan-banner h3 {
+    font-size: 1.1rem;
+  }
+
+  .ramadan-banner p {
+    font-size: 0.85rem;
+  }
+}
+
+.ramadan-banner::before {
+  content: '☾';
+  position: absolute;
+  left: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  color: var(--color-gold);
+  opacity: 0.3;
+}
+
+.ramadan-banner::after {
+  content: '★';
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  color: var(--color-gold);
+  opacity: 0.3;
+}
+
+.ramadan-banner h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--color-gold);
+  margin-bottom: var(--space-xs);
+  letter-spacing: 0.1em;
+}
+
+.ramadan-banner p {
+  color: var(--color-text-secondary);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Islamic Geometric Pattern Overlay */
+.islamic-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='1'%3E%3Cpath d='M30 0l30 30-30 30L0 30 30 0zm0 10L10 30l20 20 20-20-20-20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* Ramadan Section Styling */
+.ramadan-special-section {
+  background: linear-gradient(180deg, var(--color-bg-secondary) 0%, var(--color-purple-deep) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.ramadan-special-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0L100 50L50 100L0 50L50 0z' fill='%23D4AF37' fill-opacity='0.02'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* Smooth image loading */
+img {
+  opacity: 1;
+  transition: opacity var(--transition-base);
+}
+
+img[loading] {
+  opacity: 0;
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-rose-gold);
+  outline-offset: 2px;
+}
+
+/* ========================================
+   RTL Support (Arabic)
+   ======================================== */
+[dir="rtl"] {
+  font-family: 'DM Sans', 'Segoe UI', Tahoma, sans-serif;
+}
+
+[dir="rtl"] .hero-text,
+[dir="rtl"] .section-header,
+[dir="rtl"] .story-content,
+[dir="rtl"] .about-content,
+[dir="rtl"] .custom-content,
+[dir="rtl"] .newsletter-content,
+[dir="rtl"] .footer-brand,
+[dir="rtl"] .footer-links,
+[dir="rtl"] .footer-contact,
+[dir="rtl"] .info-card,
+[dir="rtl"] .contact-form-section,
+[dir="rtl"] .devis-form,
+[dir="rtl"] .devis-sidebar,
+[dir="rtl"] .login-card,
+[dir="rtl"] .login-benefits {
+  text-align: right;
+}
+
+[dir="rtl"] .navbar-nav {
+  direction: rtl;
+}
+
+[dir="rtl"] .dropdown-link {
+  border-left: none;
+  border-right: 2px solid transparent;
+}
+
+[dir="rtl"] .dropdown-link:hover {
+  border-left-color: transparent;
+  border-right-color: var(--color-rose-gold);
+}
+
+[dir="rtl"] .breadcrumb {
+  direction: rtl;
+}
+
+[dir="rtl"] .cart-item-details {
+  text-align: right;
+}
+
+[dir="rtl"] .panier-actions .continue-shopping {
+  direction: rtl;
+}
+
+[dir="rtl"] address {
+  text-align: right;
+}
+
+[dir="rtl"] .footer-bottom {
+  direction: rtl;
+}

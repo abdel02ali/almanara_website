@@ -1,0 +1,611 @@
+/* ========================================
+   Occasions Hero
+   ======================================== */
+.occasions-hero {
+  position: relative;
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.occasions-hero-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.occasions-hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%);
+}
+
+.occasions-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+      rgba(13, 13, 13, 0.95) 0%,
+      rgba(13, 13, 13, 0.4) 100%);
+}
+
+.occasions-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+}
+
+.occasions-hero-content h1 {
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  margin-bottom: var(--space-lg);
+}
+
+.occasions-hero-content p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: var(--space-2xl);
+  color: var(--color-text-secondary);
+}
+
+/* ========================================
+   Wedding Types We Serve
+   ======================================== */
+.wedding-types-section {
+  background: var(--color-bg-secondary);
+  overflow: hidden;
+}
+
+.wedding-types-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.wedding-type-card {
+  position: relative;
+  background: var(--color-bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  animation: weddingCardFadeIn 0.6s ease both;
+}
+
+@keyframes weddingCardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wedding-type-card:hover {
+  border-color: var(--color-rose-gold);
+  transform: translateY(-8px);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(183, 110, 121, 0.08);
+}
+
+/* Image */
+.wedding-type-image {
+  position: relative;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+}
+
+.wedding-type-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(30%) brightness(0.85);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.wedding-type-card:hover .wedding-type-image img {
+  filter: grayscale(0%) brightness(1);
+  transform: scale(1.08);
+}
+
+.wedding-type-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 30%,
+    rgba(13, 13, 13, 0.85) 100%
+  );
+  transition: background 0.4s ease;
+}
+
+.wedding-type-card:hover .wedding-type-overlay {
+  background: linear-gradient(
+    180deg,
+    transparent 40%,
+    rgba(13, 13, 13, 0.7) 100%
+  );
+}
+
+/* Icon Badge */
+.wedding-type-icon {
+  position: absolute;
+  top: var(--space-lg);
+  right: var(--space-lg);
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(13, 13, 13, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  font-size: 1.5rem;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 2;
+}
+
+.wedding-type-card:hover .wedding-type-icon {
+  background: rgba(183, 110, 121, 0.2);
+  border-color: var(--color-rose-gold);
+  transform: scale(1.1) rotate(8deg);
+}
+
+/* Content */
+.wedding-type-content {
+  padding: var(--space-xl) var(--space-xl) var(--space-2xl);
+}
+
+.wedding-type-content h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: var(--space-sm);
+  color: var(--color-text-primary);
+  transition: color 0.3s ease;
+}
+
+.wedding-type-card:hover .wedding-type-content h3 {
+  color: var(--color-rose-gold-light);
+}
+
+.wedding-type-content p {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.wedding-type-card:hover .wedding-type-content p {
+  color: var(--color-text-secondary);
+}
+
+/* Shine effect on hover */
+.wedding-type-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.04),
+    transparent
+  );
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+.wedding-type-card:hover .wedding-type-shine {
+  left: 120%;
+}
+
+/* Skeleton loading */
+.wedding-type-card.skeleton {
+  min-height: 300px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.wedding-type-card-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    rgba(255, 255, 255, 0.02) 30%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0.02) 70%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ========================================
+   Wedding Items by Category
+   ======================================== */
+.wedding-items-section {
+  background: var(--color-bg-primary);
+}
+
+/* Category Tabs */
+.wedding-category-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  justify-content: center;
+  margin-bottom: var(--space-3xl);
+}
+
+.wedding-tab {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.7rem 1.4rem;
+  background: var(--color-bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 100px;
+}
+
+.wedding-tab:hover {
+  border-color: var(--color-rose-gold);
+  color: var(--color-text-primary);
+  background: var(--color-bg-elevated);
+}
+
+.wedding-tab.active {
+  background: var(--color-rose-gold);
+  border-color: var(--color-rose-gold);
+  color: #fff;
+}
+
+.wedding-tab-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* Category Blocks */
+.wedding-categories-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4xl);
+}
+
+.wedding-category-block {
+  animation: weddingCatFadeIn 0.5s ease both;
+}
+
+@keyframes weddingCatFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wedding-category-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.wedding-category-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  min-width: 56px;
+  background: rgba(183, 110, 121, 0.12);
+  border: 1px solid rgba(183, 110, 121, 0.25);
+  border-radius: 50%;
+  font-size: 1.5rem;
+}
+
+.wedding-category-header h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: var(--space-xs);
+  color: var(--color-text-primary);
+}
+
+.wedding-category-header p {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Items Grid */
+.wedding-items-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+}
+
+/* Item Card */
+.wedding-item-card {
+  background: var(--color-bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  animation: weddingItemSlideIn 0.5s ease both;
+}
+
+@keyframes weddingItemSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.wedding-item-card:hover {
+  border-color: var(--color-rose-gold);
+  transform: translateY(-6px);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.25),
+    0 0 30px rgba(183, 110, 121, 0.06);
+}
+
+/* Item Image */
+.wedding-item-image {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+
+.wedding-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(15%) brightness(0.9);
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.wedding-item-card:hover .wedding-item-image img {
+  filter: grayscale(0%) brightness(1);
+  transform: scale(1.06);
+}
+
+/* Price Badge */
+.wedding-item-price {
+  position: absolute;
+  bottom: var(--space-md);
+  right: var(--space-md);
+  padding: 0.35rem 0.85rem;
+  background: rgba(13, 13, 13, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-rose-gold-light);
+  letter-spacing: 0.02em;
+}
+
+/* Item Content */
+.wedding-item-content {
+  padding: var(--space-lg);
+}
+
+.wedding-item-content h4 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: var(--space-xs);
+  color: var(--color-text-primary);
+  transition: color 0.3s ease;
+}
+
+.wedding-item-card:hover .wedding-item-content h4 {
+  color: var(--color-rose-gold-light);
+}
+
+.wedding-item-content p {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ========================================
+   Form Layout (reuses Devis styles)
+   ======================================== */
+.occasions-form-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: var(--space-3xl);
+  align-items: start;
+}
+
+.occasions-form {
+  background: var(--color-bg-card);
+  padding: var(--space-2xl);
+}
+
+.occasions-form .form-section {
+  margin-bottom: var(--space-2xl);
+  padding-bottom: var(--space-2xl);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.occasions-form .form-section:last-of-type {
+  border-bottom: none;
+  margin-bottom: var(--space-xl);
+  padding-bottom: 0;
+}
+
+.occasions-form .form-section h3 {
+  font-size: 1.1rem;
+  margin-bottom: var(--space-xl);
+}
+
+.occasions-form .submit-btn {
+  width: 100%;
+}
+
+.occasions-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  position: sticky;
+  top: 110px;
+}
+
+/* ========================================
+   Success State
+   ======================================== */
+.occasions-success {
+  min-height: 40vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-4xl) var(--space-lg);
+}
+
+.occasions-success .success-icon {
+  font-size: 4rem;
+  margin-bottom: var(--space-xl);
+}
+
+.occasions-success h2 {
+  margin-bottom: var(--space-md);
+}
+
+.occasions-success p {
+  max-width: 500px;
+  margin-bottom: var(--space-2xl);
+  color: var(--color-text-secondary);
+}
+
+/* ========================================
+   CTA
+   ======================================== */
+.occasions-cta {
+  padding: var(--space-5xl) 0;
+  background: var(--color-bg-primary);
+  text-align: center;
+}
+
+.occasions-cta .cta-card {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.occasions-cta .cta-card h2 {
+  margin-bottom: var(--space-lg);
+}
+
+.occasions-cta .cta-card p {
+  font-size: 1.1rem;
+  margin-bottom: var(--space-2xl);
+  color: var(--color-text-secondary);
+}
+
+.occasions-cta .cta-buttons {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+@media (max-width: 1024px) {
+  .wedding-types-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .wedding-items-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .occasions-form-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .occasions-sidebar {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .occasions-sidebar .sidebar-card {
+    flex: 1 1 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .wedding-items-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .wedding-category-tabs {
+    gap: var(--space-xs);
+  }
+
+  .wedding-tab {
+    padding: 0.55rem 1rem;
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .wedding-types-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wedding-items-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wedding-category-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .occasions-form {
+    padding: var(--space-lg);
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .occasions-cta .cta-buttons {
+    flex-direction: column;
+  }
+
+  .occasions-cta .cta-buttons .btn {
+    width: 100%;
+  }
+}
