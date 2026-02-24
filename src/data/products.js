@@ -42,7 +42,7 @@ export const products = [
     description: 'Pain moelleux aux olives noires et herbes de Provence.',
     price: 5.00,
     category: 'pain',
-    image: 'https://images.unsplash.com/photo-1585478259715-876acc5be8eb?w=400&h=300&fit=crop&q=75&auto=format'
+    image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&h=300&fit=crop&q=75&auto=format'
   },
 
   // ============================================
@@ -108,7 +108,7 @@ export const products = [
     description: 'Pâte à choux garnie de crème pâtissière au chocolat Valrhona.',
     price: 4.50,
     category: 'patisseries',
-    image: 'https://images.unsplash.com/photo-1525059337994-31ec387e475c?w=400&h=300&fit=crop&q=75&auto=format'
+    image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop&q=75&auto=format'
   },
   {
     id: 'tarte-citron',
@@ -125,7 +125,7 @@ export const products = [
     description: 'Couronne de pâte à choux, crème pralinée aux noisettes du Piémont.',
     price: 6.50,
     category: 'patisseries',
-    image: 'https://images.unsplash.com/photo-1612809075925-230094524549?w=400&h=300&fit=crop&q=75&auto=format'
+    image: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&h=300&fit=crop&q=75&auto=format'
   },
   {
     id: 'millefeuille',

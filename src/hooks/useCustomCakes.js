@@ -68,8 +68,8 @@ const staticCakeDetails = {
     price_unit: '',
     gallery_items: [
       { image: 'https://images.unsplash.com/photo-1535254973040-607b474cb50d?w=400&h=400&fit=crop', title: 'Wedding Cake Floral', price: 250 },
-      { image: 'https://images.unsplash.com/photo-1522767131822-6ea8e5e4c768?w=400&h=400&fit=crop', title: 'Pièce Montée Classic', price: 180 },
-      { image: 'https://images.unsplash.com/photo-1525428603043-03618d9d09d2?w=400&h=400&fit=crop', title: 'Nude Cake Romantique', price: 200 },
+      { image: 'https://images.unsplash.com/photo-1535254973040-607b474cb50d?w=400&h=400&fit=crop', title: 'Pièce Montée Classic', price: 180 },
+      { image: 'https://images.unsplash.com/photo-1519654793190-2e8a4806f1f2?w=400&h=400&fit=crop', title: 'Nude Cake Romantique', price: 200 },
       { image: 'https://images.unsplash.com/photo-1519654793190-2e8a4806f1f2?w=400&h=400&fit=crop', title: 'Gold & White', price: 350 }
     ],
     flavors: [
