@@ -4,6 +4,7 @@ dist/
 .env
 .env.local
 *.log
+.history/
 
 # Keep frontend repo separate from backend repo
 backend/
