@@ -11,6 +11,7 @@ function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       className="whatsapp-float"
+      data-static-link="true"
       aria-label="WhatsApp"
     >
       <svg viewBox="0 0 32 32" width="28" height="28" fill="currentColor">

@@ -37,3 +37,6 @@ export {
 
 // SEO
 export { usePageTitle } from './usePageTitle';
+
+// Site display settings
+export { useSiteDisplaySettings } from './useSiteDisplaySettings';

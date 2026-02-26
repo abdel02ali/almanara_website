@@ -3,7 +3,7 @@
  * Connects React frontend to Django backend
  */
 
-const API_BASE_URL = 'http://127.0.0.1:8000/api';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api';
 
 // ============================================
 // Fast-fail: if the backend is unreachable,
@@ -237,6 +237,21 @@ export async function getWeddingCategories() {
   return fetchAPI('/wedding-categories/');
 }
 
+/**
+ * Get global static content display settings
+ */
+export async function getSiteDisplaySettings() {
+  // Deliberately bypass fetchAPI fast-fail cache:
+  // these toggles must still be fetched even if another endpoint failed.
+  const response = await fetch(`${API_BASE_URL}/display-settings/`, {
+    headers: { 'Content-Type': 'application/json' },
+  });
+  if (!response.ok) {
+    throw new Error(`API Error: ${response.status}`);
+  }
+  return response.json();
+}
+
 // ============================================
 // CONTACT API
 // ============================================
@@ -285,6 +300,7 @@ export default {
   getProcessSteps,
   getWeddingTypes,
   getWeddingCategories,
+  getSiteDisplaySettings,
   getArticles,
   getArticleBySlug,
   getFeaturedArticles,
