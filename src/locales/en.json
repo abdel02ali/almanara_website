@@ -402,7 +402,8 @@
     "subtotal": "Subtotal",
     "delivery": "Delivery",
     "total": "Total",
-    "editCart": "Edit cart"
+    "editCart": "Edit cart",
+    "submitError": "We could not register your order. Please try again; your cart has been kept."
   },
   "confirmation": {
     "thanks": "Thank you for your order!",
