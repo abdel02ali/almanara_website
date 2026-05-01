@@ -659,12 +659,7 @@ body.hide-static-links a[href^="https://"] {
   display: none !important;
 }
 
-/* Keep background images, but hide product-style static cards and their media */
-body.hide-static-images .product-card,
-body.hide-static-images .wedding-item-card,
-body.hide-static-images .wedding-type-card,
-body.hide-static-images .occasions-home-card,
-body.hide-static-images .related-article-card,
-body.hide-static-images .related-card {
+/* Keep API-backed content visible; hide only cards explicitly marked as static fallback content. */
+body.hide-static-images [data-static-card="true"] {
   display: none !important;
 }
