@@ -12,6 +12,7 @@ function Validation() {
   const { items, total, clearCart } = useCart()
   const { isAuthenticated, user } = useAuth()
   const { createOrder, loading: orderLoading } = useCreateOrder()
+  const [submitError, setSubmitError] = useState('')
   
   const [step, setStep] = useState(1)
   const [formData, setFormData] = useState({
@@ -36,13 +37,16 @@ function Validation() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setSubmitError('')
     if (step < 3) {
       setStep(step + 1)
     } else {
       const result = await createOrder(formData, items)
       if (result.success) {
-      clearCart()
+        clearCart()
         navigate(`/commande/confirmation/${result.orderNumber}`)
+      } else {
+        setSubmitError(t('checkout.submitError'))
       }
     }
   }
@@ -350,6 +354,12 @@ function Validation() {
                   <p>{t('checkout.securePayment')}</p>
                 </div>
               </div>
+            )}
+
+            {submitError && (
+              <p className="checkout-error" role="alert">
+                {submitError}
+              </p>
             )}
 
             <div className="checkout-actions">

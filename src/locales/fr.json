@@ -402,7 +402,8 @@
     "subtotal": "Sous-total",
     "delivery": "Livraison",
     "total": "Total",
-    "editCart": "Modifier le panier"
+    "editCart": "Modifier le panier",
+    "submitError": "Votre commande n'a pas pu être enregistrée. Veuillez réessayer avant de vider votre panier."
   },
   "confirmation": {
     "thanks": "Merci pour votre commande !",
