@@ -6,6 +6,11 @@ import { products as staticProducts, categories as staticCategories, getFeatured
 // Shared cache to avoid multiple API calls
 // Cache expires after 30 seconds to pick up admin changes
 // ============================================
+const markStaticItems = (items) => items.map(item => ({ ...item, _isStatic: true }));
+const staticProductsWithMeta = markStaticItems(staticProducts);
+const staticCategoriesWithMeta = markStaticItems(staticCategories);
+const getStaticFeaturedWithMeta = () => markStaticItems(getStaticFeatured());
+
 let _apiCategoriesCache = null;
 let _apiProductsCache = null;
 let _cacheTime = 0;
@@ -28,9 +33,9 @@ async function fetchAllApiCategories() {
     // Handle paginated response (DRF wraps in {count, results})
     const list = data.results || data;
     if (list && Array.isArray(list) && list.length > 0) {
-      _apiCategoriesCache = list;
+      _apiCategoriesCache = list.map(c => ({ ...c, _fromApi: true }));
       _cacheTime = Date.now();
-      return list;
+      return _apiCategoriesCache;
     }
   } catch (err) {
     console.log('API categories unavailable');
@@ -79,7 +84,7 @@ function mergeItems(apiItems, staticItems) {
 // ============================================
 
 export function useCategories() {
-  const [categories, setCategories] = useState(staticCategories);
+  const [categories, setCategories] = useState(staticCategoriesWithMeta);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -88,7 +93,7 @@ export function useCategories() {
       try {
         const apiCategories = await fetchAllApiCategories();
         if (apiCategories.length > 0) {
-          setCategories(mergeItems(apiCategories, staticCategories));
+          setCategories(mergeItems(apiCategories, staticCategoriesWithMeta));
         }
       } catch (err) {
         setError(err);
@@ -107,7 +112,7 @@ export function useCategories() {
 // ============================================
 
 export function useProducts(params = {}) {
-  const [products, setProducts] = useState(staticProducts);
+  const [products, setProducts] = useState(staticProductsWithMeta);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -117,7 +122,7 @@ export function useProducts(params = {}) {
       try {
         const apiProducts = await fetchAllApiProducts();
         if (apiProducts.length > 0) {
-          let merged = mergeItems(apiProducts, staticProducts);
+          let merged = mergeItems(apiProducts, staticProductsWithMeta);
           
           if (params.category) {
             merged = merged.filter(p => 
@@ -127,17 +132,17 @@ export function useProducts(params = {}) {
           }
           setProducts(merged);
         } else {
-          let filtered = staticProducts;
+          let filtered = staticProductsWithMeta;
           if (params.category) {
-            filtered = staticProducts.filter(p => p.category === params.category);
+            filtered = staticProductsWithMeta.filter(p => p.category === params.category);
           }
           setProducts(filtered);
         }
       } catch (err) {
         setError(err);
-        let filtered = staticProducts;
+        let filtered = staticProductsWithMeta;
         if (params.category) {
-          filtered = staticProducts.filter(p => p.category === params.category);
+          filtered = staticProductsWithMeta.filter(p => p.category === params.category);
         }
         setProducts(filtered);
       } finally {
@@ -155,7 +160,7 @@ export function useProducts(params = {}) {
 // ============================================
 
 export function useFeaturedProducts() {
-  const [products, setProducts] = useState(getStaticFeatured());
+  const [products, setProducts] = useState(getStaticFeaturedWithMeta());
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -169,7 +174,7 @@ export function useFeaturedProducts() {
             category: p.category_slug || p.category,
             _fromApi: true
           }));
-          setProducts(mergeItems(apiProducts, getStaticFeatured()));
+          setProducts(mergeItems(apiProducts, getStaticFeaturedWithMeta()));
         }
       } catch (err) {
         setError(err);
@@ -200,7 +205,7 @@ export function useProduct(slug) {
         const data = await api.getProductBySlug(slug);
         setProduct(data);
       } catch (err) {
-        const staticProduct = staticProducts.find(p => p.id === slug || p.slug === slug);
+        const staticProduct = staticProductsWithMeta.find(p => p.id === slug || p.slug === slug);
         setProduct(staticProduct || null);
         setError(err);
       } finally {
@@ -222,10 +227,10 @@ export function useCategoryProducts(categorySlug) {
   const normalizedCategorySlug = String(categorySlug);
 
   // Find static category and products
-  const staticCategory = staticCategories.find(c =>
+  const staticCategory = staticCategoriesWithMeta.find(c =>
     String(c.id) === normalizedCategorySlug || String(c.slug) === normalizedCategorySlug
   );
-  const staticCategoryProducts = staticProducts.filter(
+  const staticCategoryProducts = staticProductsWithMeta.filter(
     p => String(p.category) === normalizedCategorySlug
   );
 

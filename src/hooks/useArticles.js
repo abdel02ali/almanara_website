@@ -41,11 +41,14 @@ const staticArticles = [
   }
 ];
 
+const markStaticArticles = (articles) => articles.map(article => ({ ...article, _isStatic: true }));
+const staticArticlesWithMeta = markStaticArticles(staticArticles);
+
 /**
  * Hook to fetch articles from API with fallback to static data
  */
 export function useArticles(params = {}) {
-  const [articles, setArticles] = useState(staticArticles);
+  const [articles, setArticles] = useState(staticArticlesWithMeta);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [usingApi, setUsingApi] = useState(false);
@@ -58,15 +61,15 @@ export function useArticles(params = {}) {
         const articleList = data.results || data;
         // Only use API data if it has actual content
         if (articleList && Array.isArray(articleList) && articleList.length > 0) {
-          setArticles(articleList);
+          setArticles(articleList.map(article => ({ ...article, _fromApi: true })));
           setUsingApi(true);
         } else {
           console.log('API returned empty articles, using static data');
-          setArticles(staticArticles);
+          setArticles(staticArticlesWithMeta);
         }
       } catch (err) {
         console.log('Using static articles (API unavailable)');
-        setArticles(staticArticles);
+        setArticles(staticArticlesWithMeta);
         setError(err);
       } finally {
         setLoading(false);
@@ -93,10 +96,10 @@ export function useArticle(slug) {
       setLoading(true);
       try {
         const data = await api.getArticleBySlug(slug);
-        setArticle(data);
+        setArticle({ ...data, _fromApi: true });
       } catch (err) {
         // Fallback to static data
-        const staticArticle = staticArticles.find(a => a.slug === slug);
+        const staticArticle = staticArticlesWithMeta.find(a => a.slug === slug);
         setArticle(staticArticle || null);
         setError(err);
       } finally {
@@ -122,13 +125,13 @@ export function useFeaturedArticles() {
       try {
         const data = await api.getFeaturedArticles();
         if (data && data.length > 0) {
-          setArticles(data);
+          setArticles(data.map(article => ({ ...article, _fromApi: true })));
         } else {
-          setArticles(staticArticles.slice(0, 3));
+          setArticles(staticArticlesWithMeta.slice(0, 3));
         }
       } catch (err) {
         console.log('Using static featured articles (API unavailable)');
-        setArticles(staticArticles.slice(0, 3));
+        setArticles(staticArticlesWithMeta.slice(0, 3));
         setError(err);
       } finally {
         setLoading(false);
@@ -153,13 +156,13 @@ export function useLatestArticles() {
       try {
         const data = await api.getLatestArticles();
         if (data && data.length > 0) {
-          setArticles(data);
+          setArticles(data.map(article => ({ ...article, _fromApi: true })));
         } else {
-          setArticles(staticArticles);
+          setArticles(staticArticlesWithMeta);
         }
       } catch (err) {
         console.log('Using static latest articles (API unavailable)');
-        setArticles(staticArticles);
+        setArticles(staticArticlesWithMeta);
         setError(err);
       } finally {
         setLoading(false);
