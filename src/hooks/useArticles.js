@@ -122,7 +122,10 @@ export function useFeaturedArticles() {
       try {
         const data = await api.getFeaturedArticles();
         if (data && data.length > 0) {
-          setArticles(data);
+          setArticles(data.map(article => ({
+            ...article,
+            _fromApi: true
+          })));
         } else {
           setArticles(staticArticles.slice(0, 3));
         }
@@ -153,7 +156,10 @@ export function useLatestArticles() {
       try {
         const data = await api.getLatestArticles();
         if (data && data.length > 0) {
-          setArticles(data);
+          setArticles(data.map(article => ({
+            ...article,
+            _fromApi: true
+          })));
         } else {
           setArticles(staticArticles);
         }
