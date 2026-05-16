@@ -75,6 +75,7 @@ function Contact() {
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="map-link"
+                  data-static-link="true"
                 >
                   {t('contact.viewOnMap')}
                 </a>
@@ -207,7 +208,7 @@ function Contact() {
 
       {/* Map */}
       <section className="map-section">
-        <div className="map-placeholder">
+        <div className="map-placeholder" data-static-image="true">
           <img 
             src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1920&h=400&fit=crop" 
             alt="Carte"
