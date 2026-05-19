@@ -57,6 +57,7 @@ function Mariages() {
                   key={type.id}
                   className="wedding-type-card"
                   style={{ animationDelay: `${i * 0.1}s` }}
+                  data-static-card={!type._fromApi ? 'true' : undefined}
                 >
                   <div className="wedding-type-image">
                     {type.image && (
@@ -137,6 +138,7 @@ function Mariages() {
                             key={item.id}
                             className="wedding-item-card"
                             style={{ animationDelay: `${i * 0.08}s` }}
+                            data-static-card={!item._fromApi ? 'true' : undefined}
                           >
                             <div className="wedding-item-image">
                               <img
