@@ -121,7 +121,12 @@ function BlogArticle() {
                     .filter(a => a.slug !== slug)
                     .slice(0, 3)
                     .map(a => (
-                      <Link key={a.id || a.slug} to={`/blog/${a.slug}`} className="related-card">
+                      <Link
+                        key={a.id || a.slug}
+                        to={`/blog/${a.slug}`}
+                        className="related-card"
+                        data-static-card={!a._fromApi ? 'true' : undefined}
+                      >
                         <div className="related-card-image">
                           <img src={a.image} alt={a.title} loading="lazy" />
                         </div>
