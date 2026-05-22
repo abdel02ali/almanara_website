@@ -57,6 +57,7 @@ function Mariages() {
                   key={type.id}
                   className="wedding-type-card"
                   style={{ animationDelay: `${i * 0.1}s` }}
+                  data-static-card={type._fromApi ? undefined : 'true'}
                 >
                   <div className="wedding-type-image">
                     {type.image && (

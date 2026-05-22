@@ -28,9 +28,12 @@ async function fetchAllApiCategories() {
     // Handle paginated response (DRF wraps in {count, results})
     const list = data.results || data;
     if (list && Array.isArray(list) && list.length > 0) {
-      _apiCategoriesCache = list;
+      _apiCategoriesCache = list.map(c => ({
+        ...c,
+        _fromApi: true
+      }));
       _cacheTime = Date.now();
-      return list;
+      return _apiCategoriesCache;
     }
   } catch (err) {
     console.log('API categories unavailable');
