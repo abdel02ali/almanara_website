@@ -1,5 +1,17 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { copyFileSync } from 'node:fs'
+import { resolve } from 'node:path'
+
+function githubPagesSpaFallback() {
+  return {
+    name: 'github-pages-spa-fallback',
+    closeBundle() {
+      const outDir = resolve(process.cwd(), 'dist')
+      copyFileSync(resolve(outDir, 'index.html'), resolve(outDir, '404.html'))
+    }
+  }
+}
 
 export default defineConfig(() => {
   const basePath = process.env.VITE_BASE_PATH || '/'
@@ -8,7 +20,7 @@ export default defineConfig(() => {
     // - Vercel: '/'
     // - GitHub Pages: '/almanara_website/'
     base: basePath,
-    plugins: [react()],
+    plugins: [react(), githubPagesSpaFallback()],
     server: {
       port: 3000
     },
