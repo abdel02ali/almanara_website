@@ -45,18 +45,38 @@ const initialState = {
   items: []
 }
 
-export function CartProvider({ children }) {
-  const [state, dispatch] = useReducer(cartReducer, initialState)
-
-  useEffect(() => {
+const getStoredCartItems = () => {
+  try {
     const savedCart = localStorage.getItem('manara-cart')
-    if (savedCart) {
-      dispatch({ type: 'LOAD_CART', payload: JSON.parse(savedCart) })
-    }
-  }, [])
+    if (!savedCart) return []
+
+    const parsedCart = JSON.parse(savedCart)
+    if (Array.isArray(parsedCart)) return parsedCart
+  } catch (err) {
+    console.warn('Ignoring corrupted cart storage', err)
+  }
+
+  try {
+    localStorage.removeItem('manara-cart')
+  } catch (removeErr) {
+    console.warn('Unable to clear corrupted cart storage', removeErr)
+  }
+  return []
+}
+
+const initCartState = () => ({
+  items: getStoredCartItems()
+})
+
+export function CartProvider({ children }) {
+  const [state, dispatch] = useReducer(cartReducer, initialState, initCartState)
 
   useEffect(() => {
-    localStorage.setItem('manara-cart', JSON.stringify(state.items))
+    try {
+      localStorage.setItem('manara-cart', JSON.stringify(state.items))
+    } catch (err) {
+      console.warn('Unable to persist cart storage', err)
+    }
   }, [state.items])
 
   const addItem = (item) => dispatch({ type: 'ADD_ITEM', payload: item })
@@ -66,7 +86,7 @@ export function CartProvider({ children }) {
   const clearCart = () => dispatch({ type: 'CLEAR_CART' })
 
   const total = state.items.reduce(
-    (sum, item) => sum + item.price * item.quantity, 0
+    (sum, item) => sum + (Number.parseFloat(item.price) || 0) * item.quantity, 0
   )
   const itemCount = state.items.reduce((sum, item) => sum + item.quantity, 0)
 

@@ -3,6 +3,8 @@ import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import './MonCompte.css'
 
+const formatPrice = (price) => (Number.parseFloat(price) || 0).toFixed(2)
+
 function MonCompte() {
   const navigate = useNavigate()
   const { user, logout, isAuthenticated } = useAuth()
@@ -91,7 +93,7 @@ function MonCompte() {
                             </span>
                           </div>
                           <div className="order-footer">
-                            <span className="order-total">{order.total.toFixed(2)} DH</span>
+                            <span className="order-total">{formatPrice(order.total)} DH</span>
                             <button className="btn btn-sm btn-secondary">
                               Voir détails
                             </button>

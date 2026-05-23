@@ -15,6 +15,12 @@ const Blog = lazy(() => import('./pages/Blog'))
 const BlogArticle = lazy(() => import('./pages/BlogArticle'))
 const Contact = lazy(() => import('./pages/Contact'))
 const Mariages = lazy(() => import('./pages/Occasions'))
+const Panier = lazy(() => import('./pages/Panier'))
+const Validation = lazy(() => import('./pages/Validation'))
+const Confirmation = lazy(() => import('./pages/Confirmation'))
+const Login = lazy(() => import('./pages/Login'))
+const MonCompte = lazy(() => import('./pages/MonCompte'))
+const APropos = lazy(() => import('./pages/APropos'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 // Loading fallback
@@ -68,6 +74,14 @@ function App() {
         
         {/* Contact */}
         <Route path="contact" element={<Contact />} />
+
+        {/* Cart / checkout / account */}
+        <Route path="panier" element={<Panier />} />
+        <Route path="commande/validation" element={<Validation />} />
+        <Route path="commande/confirmation/:id" element={<Confirmation />} />
+        <Route path="connexion" element={<Login />} />
+        <Route path="mon-compte" element={<MonCompte />} />
+        <Route path="a-propos" element={<APropos />} />
 
         {/* 404 */}
         <Route path="*" element={<NotFound />} />

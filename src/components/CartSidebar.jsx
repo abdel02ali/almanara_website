@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next'
 import { useCart } from '../context/CartContext'
 import './CartSidebar.css'
 
+const formatPrice = (price) => (Number.parseFloat(price) || 0).toFixed(2)
+
 function CartSidebar({ isOpen, onClose }) {
   const { t } = useTranslation()
   const { items, removeItem, updateQuantity, total, itemCount } = useCart()
@@ -40,7 +42,7 @@ function CartSidebar({ isOpen, onClose }) {
                   </div>
                   <div className="cart-item-details">
                     <h4>{item.name}</h4>
-                    <p className="cart-item-price">{item.price.toFixed(2)} DH</p>
+                    <p className="cart-item-price">{formatPrice(item.price)} DH</p>
                     <div className="cart-item-quantity">
                       <button 
                         onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}

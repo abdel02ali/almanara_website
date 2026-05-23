@@ -6,6 +6,8 @@ import { useAuth } from '../context/AuthContext'
 import { useCreateOrder } from '../hooks/useOrders'
 import './Validation.css'
 
+const getLineTotal = (item) => (Number.parseFloat(item.price) || 0) * item.quantity
+
 function Validation() {
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -14,6 +16,7 @@ function Validation() {
   const { createOrder, loading: orderLoading } = useCreateOrder()
   
   const [step, setStep] = useState(1)
+  const [submitError, setSubmitError] = useState('')
   const [formData, setFormData] = useState({
     email: user?.email || '',
     firstName: '',
@@ -36,13 +39,16 @@ function Validation() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setSubmitError('')
     if (step < 3) {
       setStep(step + 1)
     } else {
       const result = await createOrder(formData, items)
       if (result.success) {
-      clearCart()
+        clearCart()
         navigate(`/commande/confirmation/${result.orderNumber}`)
+      } else {
+        setSubmitError(t('checkout.submitError', 'Impossible d’enregistrer votre commande. Veuillez réessayer sans vider votre panier.'))
       }
     }
   }
@@ -352,6 +358,12 @@ function Validation() {
               </div>
             )}
 
+            {submitError && (
+              <p className="form-error" role="alert">
+                {submitError}
+              </p>
+            )}
+
             <div className="checkout-actions">
               {step > 1 && (
                 <button 
@@ -381,7 +393,7 @@ function Validation() {
                   <div className="summary-item-info">
                     <span className="summary-item-name">{item.name}</span>
                     <span className="summary-item-price">
-                      {(item.price * item.quantity).toFixed(2)} DH
+                      {getLineTotal(item).toFixed(2)} DH
                     </span>
                   </div>
                 </div>

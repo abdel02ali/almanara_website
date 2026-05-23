@@ -307,6 +307,11 @@ select {
   resize: vertical;
 }
 
+.form-error {
+  color: var(--color-error, #ef4444);
+  margin: 0 0 var(--space-lg);
+}
+
 /* Badge */
 .badge {
   display: inline-flex;
