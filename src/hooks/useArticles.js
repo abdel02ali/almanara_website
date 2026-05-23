@@ -41,6 +41,13 @@ const staticArticles = [
   }
 ];
 
+function markApiArticles(articles) {
+  return articles.map(article => ({
+    ...article,
+    _fromApi: true
+  }));
+}
+
 /**
  * Hook to fetch articles from API with fallback to static data
  */
@@ -58,7 +65,7 @@ export function useArticles(params = {}) {
         const articleList = data.results || data;
         // Only use API data if it has actual content
         if (articleList && Array.isArray(articleList) && articleList.length > 0) {
-          setArticles(articleList);
+          setArticles(markApiArticles(articleList));
           setUsingApi(true);
         } else {
           console.log('API returned empty articles, using static data');
@@ -93,7 +100,7 @@ export function useArticle(slug) {
       setLoading(true);
       try {
         const data = await api.getArticleBySlug(slug);
-        setArticle(data);
+        setArticle(data ? { ...data, _fromApi: true } : data);
       } catch (err) {
         // Fallback to static data
         const staticArticle = staticArticles.find(a => a.slug === slug);
@@ -122,7 +129,7 @@ export function useFeaturedArticles() {
       try {
         const data = await api.getFeaturedArticles();
         if (data && data.length > 0) {
-          setArticles(data);
+          setArticles(markApiArticles(data));
         } else {
           setArticles(staticArticles.slice(0, 3));
         }
@@ -153,7 +160,7 @@ export function useLatestArticles() {
       try {
         const data = await api.getLatestArticles();
         if (data && data.length > 0) {
-          setArticles(data);
+          setArticles(markApiArticles(data));
         } else {
           setArticles(staticArticles);
         }

@@ -1,18 +1,25 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useContext, useState } from 'react'
 
 const AuthContext = createContext()
 
-export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
+const getStoredUser = () => {
+  try {
     const savedUser = localStorage.getItem('manara-user')
-    if (savedUser) {
-      setUser(JSON.parse(savedUser))
+    return savedUser ? JSON.parse(savedUser) : null
+  } catch (err) {
+    console.warn('Ignoring corrupted auth storage', err)
+    try {
+      localStorage.removeItem('manara-user')
+    } catch (removeErr) {
+      console.warn('Unable to clear corrupted auth storage', removeErr)
     }
-    setLoading(false)
-  }, [])
+    return null
+  }
+}
+
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState(getStoredUser)
+  const [loading] = useState(false)
 
   const login = (email, password) => {
     // Simulation d'authentification

@@ -3,6 +3,9 @@ import { useTranslation } from 'react-i18next'
 import { useCart } from '../context/CartContext'
 import './Panier.css'
 
+const formatPrice = (price) => (Number.parseFloat(price) || 0).toFixed(2)
+const getLineTotal = (item) => (Number.parseFloat(item.price) || 0) * item.quantity
+
 function Panier() {
   const { t } = useTranslation()
   const { items, removeItem, updateQuantity, total, clearCart } = useCart()
@@ -53,7 +56,7 @@ function Panier() {
                     </div>
                   </div>
                   <div className="panier-price">
-                    {item.price.toFixed(2)} DH
+                    {formatPrice(item.price)} DH
                   </div>
                   <div className="panier-quantity">
                     <button 
@@ -68,7 +71,7 @@ function Panier() {
                     </button>
                   </div>
                   <div className="panier-total">
-                    {(item.price * item.quantity).toFixed(2)} DH
+                    {getLineTotal(item).toFixed(2)} DH
                   </div>
                   <button 
                     className="panier-remove"
