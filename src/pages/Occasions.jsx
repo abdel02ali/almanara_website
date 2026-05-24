@@ -22,6 +22,7 @@ function Mariages() {
             alt={t('mariages.heroAlt')}
             width="1280"
             height="720"
+            data-static-image="true"
             fetchPriority="high"
           />
           <div className="occasions-hero-overlay"></div>

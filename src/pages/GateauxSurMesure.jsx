@@ -18,6 +18,7 @@ function GateauxSurMesure() {
           <img 
             src="https://images.unsplash.com/photo-1535254973040-607b474cb50d?w=1920&h=1080&fit=crop" 
             alt="Gâteau de mariage" 
+            data-static-image="true"
           />
           <div className="gateaux-hero-overlay"></div>
         </div>
