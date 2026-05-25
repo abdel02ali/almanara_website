@@ -89,7 +89,11 @@ function Home() {
           
           <div className="featured-grid stagger">
             {featuredProducts.slice(0, 4).map((product, index) => (
-              <article key={product.slug || product.id} className={`product-card ${index === 0 ? 'large' : ''}`}>
+              <article
+                key={product.slug || product.id}
+                className={`product-card ${index === 0 ? 'large' : ''}`}
+                data-static-card={product._fromApi ? undefined : 'true'}
+              >
                 <div className="product-image">
                   <img src={product.image} alt={product.name} loading="lazy" />
                 </div>
@@ -128,6 +132,7 @@ function Home() {
                 to={`/boutique/${category.slug || category.id}`}
                 className="category-showcase-card"
                 style={{ '--index': index }}
+                data-static-card={category._fromApi ? undefined : 'true'}
               >
                 <div className="category-image">
                   <img src={category.image} alt={category.name} loading="lazy" />
@@ -172,19 +177,19 @@ function Home() {
             <p>{t('home.weddingsDesc')}</p>
           </div>
           <div className="occasions-home-grid">
-            <div className="occasions-home-card">
+            <div className="occasions-home-card" data-static-card="true">
               <img src="/pictures/wed.jpeg" alt={t('home.weddingsCake')} loading="lazy" width="500" height="375" />
               <div className="occasions-home-overlay">
                 <h3>{t('home.weddingsCake')}</h3>
               </div>
             </div>
-            <div className="occasions-home-card">
+            <div className="occasions-home-card" data-static-card="true">
               <img src="https://images.unsplash.com/photo-1535254973040-607b474cb50d?w=500&q=75&auto=format&fit=crop" alt={t('home.weddingsPieceMontee')} loading="lazy" width="500" height="375" />
               <div className="occasions-home-overlay">
                 <h3>{t('home.weddingsPieceMontee')}</h3>
               </div>
             </div>
-            <div className="occasions-home-card">
+            <div className="occasions-home-card" data-static-card="true">
               <img src="https://images.unsplash.com/photo-1558636508-e0db3814bd1d?w=500&q=75&auto=format&fit=crop" alt={t('home.weddingsCandyBar')} loading="lazy" width="500" height="375" />
               <div className="occasions-home-overlay">
                 <h3>{t('home.weddingsCandyBar')}</h3>
