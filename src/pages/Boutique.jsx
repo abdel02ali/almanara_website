@@ -56,6 +56,7 @@ function Boutique() {
                 key={getCategoryKey(category)}
                 to={`/boutique/${getCategoryKey(category)}`}
                 className="boutique-category-card"
+                data-static-card={category._fromApi ? undefined : 'true'}
               >
                 <div className="boutique-category-image">
                   <img src={category.image} alt={getCatName(category, i18n.language)} loading="lazy" />
@@ -114,7 +115,11 @@ function Boutique() {
               <p className="results-count">{filteredProducts.length} {filteredProducts.length > 1 ? t('shop.products') : t('shop.product')}</p>
               <div className="boutique-products-grid stagger">
                 {filteredProducts.map(product => (
-                  <article key={product.slug || product.id} className="product-card card">
+                  <article
+                    key={product.slug || product.id}
+                    className="product-card card"
+                    data-static-card={product._fromApi ? undefined : 'true'}
+                  >
                     <div className="product-image">
                       <img src={product.image} alt={product.name} loading="lazy" />
                       {product.badge && (
