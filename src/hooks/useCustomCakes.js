@@ -109,7 +109,10 @@ export function useCustomCakeTypes() {
         const data = await api.getCustomCakeTypes();
         const list = data.results || data;
         if (Array.isArray(list) && list.length > 0) {
-          setCakeTypes(list);
+          setCakeTypes(list.map(type => ({
+            ...type,
+            _fromApi: true
+          })));
         }
       } catch (err) {
         console.log('API custom cake types unavailable, using static data');
@@ -139,7 +142,10 @@ export function useProcessSteps() {
         const data = await api.getProcessSteps();
         const list = data.results || data;
         if (Array.isArray(list) && list.length > 0) {
-          setSteps(list);
+          setSteps(list.map(step => ({
+            ...step,
+            _fromApi: true
+          })));
         }
       } catch (err) {
         console.log('API process steps unavailable, using static data');
@@ -172,7 +178,16 @@ export function useCustomCakeDetail(slug) {
       try {
         const data = await api.getCustomCakeTypeBySlug(slug);
         if (data && data.title) {
-          setCakeDetail(data);
+          setCakeDetail({
+            ...data,
+            _fromApi: true,
+            gallery_items: Array.isArray(data.gallery_items)
+              ? data.gallery_items.map(item => ({
+                  ...item,
+                  _fromApi: true
+                }))
+              : data.gallery_items
+          });
         }
       } catch (err) {
         console.log(`API custom cake detail unavailable for ${slug}, using static data`);
