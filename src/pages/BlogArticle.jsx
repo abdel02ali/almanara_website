@@ -1,6 +1,7 @@
-import { memo } from 'react'
+import { memo, useMemo } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import DOMPurify from 'dompurify'
 import { useArticle, useLatestArticles } from '../hooks/useArticles'
 import { usePageTitle } from '../hooks/usePageTitle'
 import './BlogArticle.css'
@@ -13,6 +14,11 @@ function BlogArticle() {
 
   // Set page title from article
   usePageTitle(article?.title || 'pageTitles.blog', !!article?.title)
+
+  const sanitizedArticleContent = useMemo(
+    () => (article?.content ? DOMPurify.sanitize(article.content) : ''),
+    [article?.content]
+  )
 
   const dateLocale = i18n.language?.startsWith('ar') ? 'ar-MA' : i18n.language === 'en' ? 'en-GB' : 'fr-FR'
 
@@ -102,10 +108,10 @@ function BlogArticle() {
         </div>
 
         <div className="container">
-          {article.content && (
+          {sanitizedArticleContent && (
             <div
               className="article-content"
-              dangerouslySetInnerHTML={{ __html: article.content }}
+              dangerouslySetInnerHTML={{ __html: sanitizedArticleContent }}
             />
           )}
         </div>
