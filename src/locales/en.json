@@ -396,6 +396,7 @@
     "securePayment": "Secure payment with SSL encryption",
     "back": "← Back",
     "processing": "Processing...",
+    "submitError": "We could not save your order right now. Please try again later.",
     "pay": "Pay",
     "continue": "Continue →",
     "yourOrder": "Your order",

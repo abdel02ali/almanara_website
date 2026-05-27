@@ -396,6 +396,7 @@
     "securePayment": "دفع آمن بتشفير SSL",
     "back": "← رجوع",
     "processing": "معالجة...",
+    "submitError": "تعذر حفظ طلبك حالياً. يرجى المحاولة لاحقاً.",
     "pay": "ادفع",
     "continue": "متابعة →",
     "yourOrder": "طلبك",

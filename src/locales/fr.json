@@ -396,6 +396,7 @@
     "securePayment": "Paiement sécurisé par cryptage SSL",
     "back": "← Retour",
     "processing": "Traitement...",
+    "submitError": "Impossible d'enregistrer la commande pour le moment. Veuillez réessayer plus tard.",
     "pay": "Payer",
     "continue": "Continuer →",
     "yourOrder": "Votre commande",
