@@ -11,7 +11,7 @@ function Validation() {
   const navigate = useNavigate()
   const { items, total, clearCart } = useCart()
   const { isAuthenticated, user } = useAuth()
-  const { createOrder, loading: orderLoading } = useCreateOrder()
+  const { createOrder, loading: orderLoading, error: orderError } = useCreateOrder()
   
   const [step, setStep] = useState(1)
   const [formData, setFormData] = useState({
@@ -41,7 +41,7 @@ function Validation() {
     } else {
       const result = await createOrder(formData, items)
       if (result.success) {
-      clearCart()
+        clearCart()
         navigate(`/commande/confirmation/${result.orderNumber}`)
       }
     }
@@ -353,6 +353,11 @@ function Validation() {
             )}
 
             <div className="checkout-actions">
+              {orderError && (
+                <p className="checkout-form-error" role="alert" aria-live="polite">
+                  {t('checkout.submitError')}
+                </p>
+              )}
               {step > 1 && (
                 <button 
                   type="button" 

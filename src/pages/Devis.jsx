@@ -6,7 +6,7 @@ import './Devis.css'
 
 function Devis() {
   const { t } = useTranslation()
-  const { submitDevis, loading } = useSubmitDevis()
+  const { submitDevis, loading, error } = useSubmitDevis()
   const [formData, setFormData] = useState({
     eventType: '',
     eventDate: '',
@@ -59,7 +59,7 @@ function Devis() {
     const result = await submitDevis(devisData)
     if (result.success) {
       setReferenceNumber(result.referenceNumber)
-    setSubmitted(true)
+      setSubmitted(true)
     }
   }
 
@@ -237,6 +237,12 @@ function Devis() {
                   </div>
                 </div>
               </div>
+
+              {error && (
+                <p className="devis-form-error" role="alert" aria-live="polite">
+                  {t('devis.sendError')}
+                </p>
+              )}
 
               <button type="submit" className="btn btn-gold btn-lg submit-btn" disabled={loading}>
                 {loading ? t('devis.sending') : t('devis.submit')}
