@@ -1,3 +1,5 @@
+import { publicAssetPath } from '../utils/publicAssetPath'
+
 // Product data for Al Manara Bakery
 export const products = [
   // ============================================
@@ -9,7 +11,7 @@ export const products = [
     description: 'Notre baguette tradition au levain naturel, croûte croustillante et mie alvéolée.',
     price: 1.40,
     category: 'pain',
-    image: '/pictures/bag.jpeg',
+    image: publicAssetPath('pictures/bag.jpeg'),
     badge: 'Signature'
   },
   {
@@ -54,7 +56,7 @@ export const products = [
     description: 'Crêpe feuilletée marocaine, croustillante et fondante, idéale pour le petit-déjeuner.',
     price: 1.50,
     category: 'traditionnel',
-    image: '/pictures/msemen.jpeg',
+    image: publicAssetPath('pictures/msemen.jpeg'),
     badge: 'Best-seller'
   },
   {
@@ -79,7 +81,7 @@ export const products = [
     description: 'Pâtisserie en forme de croissant garnie de pâte d\'amande parfumée à la fleur d\'oranger.',
     price: 2.50,
     category: 'traditionnel',
-    image: '/pictures/ghzal.jpeg',
+    image: publicAssetPath('pictures/ghzal.jpeg'),
     badge: 'Signature'
   },
   {

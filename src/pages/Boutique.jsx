@@ -114,7 +114,11 @@ function Boutique() {
               <p className="results-count">{filteredProducts.length} {filteredProducts.length > 1 ? t('shop.products') : t('shop.product')}</p>
               <div className="boutique-products-grid stagger">
                 {filteredProducts.map(product => (
-                  <article key={product.slug || product.id} className="product-card card">
+                  <article
+                    key={product.slug || product.id}
+                    className="product-card card"
+                    data-static-image={!product._fromApi ? 'true' : undefined}
+                  >
                     <div className="product-image">
                       <img src={product.image} alt={product.name} loading="lazy" />
                       {product.badge && (
