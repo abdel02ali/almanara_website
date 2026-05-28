@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useWeddingTypes, useWeddingCategories } from '../hooks'
 import { usePageTitle } from '../hooks/usePageTitle'
+import { publicAssetPath } from '../utils/publicAssetPath'
 import './Occasions.css'
 
 function Mariages() {
@@ -18,7 +19,7 @@ function Mariages() {
       <header className="occasions-hero">
         <div className="occasions-hero-bg">
           <img
-            src="/pictures/The-Splendor-of-a-Traditional-Moroccan-Wedding-Celebration-scaled.jpg"
+            src={publicAssetPath('pictures/The-Splendor-of-a-Traditional-Moroccan-Wedding-Celebration-scaled.jpg')}
             alt={t('mariages.heroAlt')}
             width="1280"
             height="720"
@@ -56,6 +57,7 @@ function Mariages() {
                 <div
                   key={type.id}
                   className="wedding-type-card"
+                  data-static-image={!type._fromApi ? 'true' : undefined}
                   style={{ animationDelay: `${i * 0.1}s` }}
                 >
                   <div className="wedding-type-image">
