@@ -40,7 +40,7 @@ function GateauxCategory() {
     <div className="gateaux-category-page">
       <header className="gateaux-cat-hero">
         <div className="gateaux-cat-hero-bg">
-          <img src={data.hero_image} alt={data.title} />
+          <img src={data.hero_image} alt={data.title} data-static-image={data.__isStaticFallback ? 'true' : undefined} />
           <div className="gateaux-cat-hero-overlay"></div>
         </div>
         <div className="container">
@@ -67,7 +67,11 @@ function GateauxCategory() {
 
             <div className="gallery-grid">
               {galleryItems.map((item, index) => (
-                <div key={item.id || index} className="gallery-item">
+                <div
+                  key={item.id || index}
+                  className="gallery-item"
+                  data-static-card={item.__isStaticFallback ? 'true' : undefined}
+                >
                   <img src={item.image} alt={item.title} loading="lazy" />
                   <div className="gallery-overlay">
                     <h3>{item.title}</h3>

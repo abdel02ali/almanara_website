@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import * as api from '../services/api';
 
 // Static fallback articles data
+const markStaticContent = item => ({ ...item, __isStaticFallback: true });
+
 const staticArticles = [
   {
     id: 1,
@@ -39,7 +41,7 @@ const staticArticles = [
     reading_time: 3,
     published_at: '2024-02-10'
   }
-];
+].map(markStaticContent);
 
 /**
  * Hook to fetch articles from API with fallback to static data
