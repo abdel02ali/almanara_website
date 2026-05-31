@@ -53,6 +53,7 @@ function Blog() {
                     key={article.id || article.slug}
                     to={`/blog/${article.slug || article.id}`}
                     className={`blog-card ${index === 0 ? 'featured' : ''}`}
+                    data-static-card={article.__isStaticFallback ? 'true' : undefined}
                   >
                     <div className="blog-card-image">
                       <img src={article.image} alt={article.title} loading="lazy" />

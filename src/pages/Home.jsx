@@ -22,6 +22,7 @@ function Home() {
               alt="Artisan bread"
               width="1280"
               height="800"
+              data-static-image="true"
               fetchPriority="high"
             />
           </div>
@@ -89,7 +90,11 @@ function Home() {
           
           <div className="featured-grid stagger">
             {featuredProducts.slice(0, 4).map((product, index) => (
-              <article key={product.slug || product.id} className={`product-card ${index === 0 ? 'large' : ''}`}>
+              <article
+                key={product.slug || product.id}
+                className={`product-card ${index === 0 ? 'large' : ''}`}
+                data-static-card={product.__isStaticFallback ? 'true' : undefined}
+              >
                 <div className="product-image">
                   <img src={product.image} alt={product.name} loading="lazy" />
                 </div>
@@ -128,6 +133,7 @@ function Home() {
                 to={`/boutique/${category.slug || category.id}`}
                 className="category-showcase-card"
                 style={{ '--index': index }}
+                data-static-card={category.__isStaticFallback ? 'true' : undefined}
               >
                 <div className="category-image">
                   <img src={category.image} alt={category.name} loading="lazy" />
@@ -146,7 +152,7 @@ function Home() {
       {/* Custom Cakes Banner */}
       <section className="custom-section">
         <div className="custom-bg">
-          <img src="https://images.unsplash.com/photo-1535254973040-607b474cb50d?w=1280&q=75&auto=format&fit=crop" alt="Wedding cake" loading="lazy" width="1280" height="600" />
+          <img src="https://images.unsplash.com/photo-1535254973040-607b474cb50d?w=1280&q=75&auto=format&fit=crop" alt="Wedding cake" loading="lazy" width="1280" height="600" data-static-image="true" />
         </div>
         <div className="container">
           <div className="custom-content">
@@ -172,20 +178,20 @@ function Home() {
             <p>{t('home.weddingsDesc')}</p>
           </div>
           <div className="occasions-home-grid">
-            <div className="occasions-home-card">
-              <img src="/pictures/wed.jpeg" alt={t('home.weddingsCake')} loading="lazy" width="500" height="375" />
+            <div className="occasions-home-card" data-static-card="true">
+              <img src="/pictures/wed.jpeg" alt={t('home.weddingsCake')} loading="lazy" width="500" height="375" data-static-image="true" />
               <div className="occasions-home-overlay">
                 <h3>{t('home.weddingsCake')}</h3>
               </div>
             </div>
-            <div className="occasions-home-card">
-              <img src="https://images.unsplash.com/photo-1535254973040-607b474cb50d?w=500&q=75&auto=format&fit=crop" alt={t('home.weddingsPieceMontee')} loading="lazy" width="500" height="375" />
+            <div className="occasions-home-card" data-static-card="true">
+              <img src="https://images.unsplash.com/photo-1535254973040-607b474cb50d?w=500&q=75&auto=format&fit=crop" alt={t('home.weddingsPieceMontee')} loading="lazy" width="500" height="375" data-static-image="true" />
               <div className="occasions-home-overlay">
                 <h3>{t('home.weddingsPieceMontee')}</h3>
               </div>
             </div>
-            <div className="occasions-home-card">
-              <img src="https://images.unsplash.com/photo-1558636508-e0db3814bd1d?w=500&q=75&auto=format&fit=crop" alt={t('home.weddingsCandyBar')} loading="lazy" width="500" height="375" />
+            <div className="occasions-home-card" data-static-card="true">
+              <img src="https://images.unsplash.com/photo-1558636508-e0db3814bd1d?w=500&q=75&auto=format&fit=crop" alt={t('home.weddingsCandyBar')} loading="lazy" width="500" height="375" data-static-image="true" />
               <div className="occasions-home-overlay">
                 <h3>{t('home.weddingsCandyBar')}</h3>
               </div>

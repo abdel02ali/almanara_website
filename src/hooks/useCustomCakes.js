@@ -5,6 +5,9 @@ import * as api from '../services/api';
 // Static fallback data (used when API is unavailable)
 // ============================================
 
+const markStaticContent = item => ({ ...item, __isStaticFallback: true });
+const markStaticGallery = items => items.map(markStaticContent);
+
 const staticCakeTypes = [
   {
     id: 'anniversaire',
@@ -33,7 +36,7 @@ const staticCakeTypes = [
     price_from: 80,
     price_unit: ''
   }
-];
+].map(markStaticContent);
 
 const staticProcessSteps = [
   { id: 1, step_number: 1, title: 'Consultation', description: 'Discutons de votre vision, du thème et du nombre d\'invités.', icon: '○' },
@@ -44,50 +47,53 @@ const staticProcessSteps = [
 
 const staticCakeDetails = {
   anniversaire: {
+    __isStaticFallback: true,
     title: 'Gâteaux d\'Anniversaire',
     description: 'Des créations uniques pour célébrer chaque année de vie avec gourmandise.',
     hero_image: 'https://images.unsplash.com/photo-1558636508-e0db3814bd1d?w=1920&h=800&fit=crop',
     price_unit: '',
-    gallery_items: [
+    gallery_items: markStaticGallery([
       { image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=400&fit=crop', title: 'Number Cake', price: 45 },
       { image: 'https://images.unsplash.com/photo-1535254973040-607b474cb50d?w=400&h=400&fit=crop', title: 'Gâteau Licorne', price: 55 },
       { image: 'https://images.unsplash.com/photo-1562777717-dc6984f65a63?w=400&h=400&fit=crop', title: 'Layer Cake Chocolat', price: 48 },
       { image: 'https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?w=400&h=400&fit=crop', title: 'Drip Cake Fruits', price: 52 },
       { image: 'https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=400&h=400&fit=crop', title: 'Gâteau Photo', price: 60 },
       { image: 'https://images.unsplash.com/photo-1557979619-445218f326b9?w=400&h=400&fit=crop', title: 'Naked Cake', price: 42 }
-    ],
+    ]),
     flavors: [
       { name: 'Vanille' }, { name: 'Chocolat' }, { name: 'Fraise' }, { name: 'Citron' },
       { name: 'Caramel' }, { name: 'Fruits rouges' }, { name: 'Praliné' }
     ]
   },
   mariage: {
+    __isStaticFallback: true,
     title: 'Wedding Cakes',
     description: 'Pièces montées et wedding cakes élégants pour le plus beau jour de votre vie.',
     hero_image: 'https://images.unsplash.com/photo-1535254973040-607b474cb50d?w=1920&h=800&fit=crop',
     price_unit: '',
-    gallery_items: [
+    gallery_items: markStaticGallery([
       { image: 'https://images.unsplash.com/photo-1535254973040-607b474cb50d?w=400&h=400&fit=crop', title: 'Wedding Cake Floral', price: 250 },
       { image: 'https://images.unsplash.com/photo-1535254973040-607b474cb50d?w=400&h=400&fit=crop', title: 'Pièce Montée Classic', price: 180 },
       { image: 'https://images.unsplash.com/photo-1519654793190-2e8a4806f1f2?w=400&h=400&fit=crop', title: 'Nude Cake Romantique', price: 200 },
       { image: 'https://images.unsplash.com/photo-1519654793190-2e8a4806f1f2?w=400&h=400&fit=crop', title: 'Gold & White', price: 350 }
-    ],
+    ]),
     flavors: [
       { name: 'Vanille Bourbon' }, { name: 'Chocolat Grand Cru' }, { name: 'Fruits de la passion' },
       { name: 'Rose & Litchi' }, { name: 'Caramel beurre salé' }
     ]
   },
   entreprise: {
+    __isStaticFallback: true,
     title: 'Événements Corporate',
     description: 'Des prestations sucrées sur mesure pour vos événements professionnels.',
     hero_image: 'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=1920&h=800&fit=crop',
     price_unit: '/pers.',
-    gallery_items: [
+    gallery_items: markStaticGallery([
       { image: 'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400&h=400&fit=crop', title: 'Buffet Mignardises', price: 15 },
       { image: 'https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400&h=400&fit=crop', title: 'Cupcakes Logo', price: 5 },
       { image: 'https://images.unsplash.com/photo-1550617931-e17a7b70dce2?w=400&h=400&fit=crop', title: 'Macarons Assortis', price: 2.5 },
       { image: 'https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=400&h=400&fit=crop', title: 'Gâteau Corporate', price: 120 }
-    ],
+    ]),
     flavors: [
       { name: 'Assortiment varié' }, { name: 'Thématique au choix' }, { name: 'Personnalisation logo' }
     ]

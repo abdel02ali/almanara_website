@@ -402,7 +402,8 @@
     "subtotal": "Sous-total",
     "delivery": "Livraison",
     "total": "Total",
-    "editCart": "Modifier le panier"
+    "editCart": "Modifier le panier",
+    "submitError": "Nous n'avons pas pu envoyer votre commande. Veuillez réessayer ou nous contacter par téléphone."
   },
   "confirmation": {
     "thanks": "Merci pour votre commande !",

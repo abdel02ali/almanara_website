@@ -5,6 +5,8 @@ import * as api from '../services/api';
 // Static fallback data (used when API is unavailable)
 // ============================================
 
+const markStaticContent = item => ({ ...item, __isStaticFallback: true });
+
 const staticWeddingTypes = [
   {
     id: 1,
@@ -54,7 +56,7 @@ const staticWeddingTypes = [
     image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&h=400&fit=crop',
     order: 6
   }
-];
+].map(markStaticContent);
 
 // ============================================
 // WEDDING TYPES HOOK

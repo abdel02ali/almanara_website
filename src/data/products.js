@@ -1,4 +1,6 @@
 // Product data for Al Manara Bakery
+const markStaticContent = item => ({ ...item, __isStaticFallback: true })
+
 export const products = [
   // ============================================
   // PAIN
@@ -268,7 +270,7 @@ export const products = [
     category: 'jus',
     image: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&h=300&fit=crop&q=75&auto=format'
   }
-]
+].map(markStaticContent)
 
 export const categories = [
   {
@@ -316,7 +318,7 @@ export const categories = [
     image: 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=600&h=400&fit=crop&q=75&auto=format',
     icon: '○'
   }
-]
+].map(markStaticContent)
 
 export const getProductsByCategory = (categoryId) => {
   return products.filter(p => p.category === categoryId)

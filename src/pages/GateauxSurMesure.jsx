@@ -18,6 +18,7 @@ function GateauxSurMesure() {
           <img 
             src="https://images.unsplash.com/photo-1535254973040-607b474cb50d?w=1920&h=1080&fit=crop" 
             alt="Gâteau de mariage" 
+            data-static-image="true"
           />
           <div className="gateaux-hero-overlay"></div>
         </div>
@@ -48,6 +49,7 @@ function GateauxSurMesure() {
                   key={type.id}
                   to={`/gateaux/${type.slug || type.id}`}
                   className="cake-type-card"
+                  data-static-card={type.__isStaticFallback ? 'true' : undefined}
                 >
                   <div className="cake-type-image">
                     <img src={type.image} alt={type.title} loading="lazy" />

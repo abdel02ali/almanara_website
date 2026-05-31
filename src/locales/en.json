@@ -402,7 +402,8 @@
     "subtotal": "Subtotal",
     "delivery": "Delivery",
     "total": "Total",
-    "editCart": "Edit cart"
+    "editCart": "Edit cart",
+    "submitError": "We could not submit your order. Please try again or contact us by phone."
   },
   "confirmation": {
     "thanks": "Thank you for your order!",
