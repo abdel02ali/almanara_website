@@ -58,7 +58,10 @@ export function useArticles(params = {}) {
         const articleList = data.results || data;
         // Only use API data if it has actual content
         if (articleList && Array.isArray(articleList) && articleList.length > 0) {
-          setArticles(articleList);
+          setArticles(articleList.map(article => ({
+            ...article,
+            _fromApi: true
+          })));
           setUsingApi(true);
         } else {
           console.log('API returned empty articles, using static data');
@@ -122,7 +125,10 @@ export function useFeaturedArticles() {
       try {
         const data = await api.getFeaturedArticles();
         if (data && data.length > 0) {
-          setArticles(data);
+          setArticles(data.map(article => ({
+            ...article,
+            _fromApi: true
+          })));
         } else {
           setArticles(staticArticles.slice(0, 3));
         }
@@ -153,7 +159,10 @@ export function useLatestArticles() {
       try {
         const data = await api.getLatestArticles();
         if (data && data.length > 0) {
-          setArticles(data);
+          setArticles(data.map(article => ({
+            ...article,
+            _fromApi: true
+          })));
         } else {
           setArticles(staticArticles);
         }
