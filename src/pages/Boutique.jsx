@@ -56,6 +56,7 @@ function Boutique() {
                 key={getCategoryKey(category)}
                 to={`/boutique/${getCategoryKey(category)}`}
                 className="boutique-category-card"
+                data-static-image={category._fromApi ? undefined : 'true'}
               >
                 <div className="boutique-category-image">
                   <img src={category.image} alt={getCatName(category, i18n.language)} loading="lazy" />

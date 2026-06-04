@@ -131,6 +131,7 @@ function Home() {
                 key={category.slug || category.id} 
                 to={`/boutique/${category.slug || category.id}`}
                 className="category-showcase-card"
+                data-static-image={category._fromApi ? undefined : 'true'}
                 style={{ '--index': index }}
               >
                 <div className="category-image">
