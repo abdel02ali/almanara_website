@@ -71,7 +71,10 @@ export function useWeddingTypes() {
         const data = await api.getWeddingTypes();
         const list = data.results || data;
         if (Array.isArray(list) && list.length > 0) {
-          setWeddingTypes(list);
+          setWeddingTypes(list.map(type => ({
+            ...type,
+            _fromApi: true
+          })));
         }
       } catch (err) {
         console.log('API wedding types unavailable, using static data');
