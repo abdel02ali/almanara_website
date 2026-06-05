@@ -119,7 +119,7 @@ function Login() {
                   <input type="checkbox" />
                   <span>{t('login.rememberMe')}</span>
                 </label>
-                <a href="#" className="forgot-link">{t('login.forgotPassword')}</a>
+                <a href="#" className="forgot-link" data-static-link="true">{t('login.forgotPassword')}</a>
               </div>
             )}
 
