@@ -18,7 +18,7 @@ function Mariages() {
       <header className="occasions-hero">
         <div className="occasions-hero-bg">
           <img
-            src="/pictures/The-Splendor-of-a-Traditional-Moroccan-Wedding-Celebration-scaled.jpg"
+            src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1280&q=75&auto=format&fit=crop"
             alt={t('mariages.heroAlt')}
             width="1280"
             height="720"
@@ -56,6 +56,7 @@ function Mariages() {
                 <div
                   key={type.id}
                   className="wedding-type-card"
+                  data-static-image={type._fromApi ? undefined : 'true'}
                   style={{ animationDelay: `${i * 0.1}s` }}
                 >
                   <div className="wedding-type-image">
