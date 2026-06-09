@@ -21,6 +21,7 @@ function Devis() {
 
   const [submitted, setSubmitted] = useState(false)
   const [referenceNumber, setReferenceNumber] = useState('')
+  const [submitError, setSubmitError] = useState('')
 
   const flavorOptions = [
     'Vanille', 'Chocolat', 'Fraise', 'Citron', 'Caramel',
@@ -43,6 +44,7 @@ function Devis() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setSubmitError('')
     
     const devisData = {
       firstName: formData.name.split(' ')[0] || '',
@@ -59,7 +61,9 @@ function Devis() {
     const result = await submitDevis(devisData)
     if (result.success) {
       setReferenceNumber(result.referenceNumber)
-    setSubmitted(true)
+      setSubmitted(true)
+    } else {
+      setSubmitError(t('devis.submitError', 'Nous n’avons pas pu envoyer votre demande. Veuillez réessayer ou nous contacter directement.'))
     }
   }
 
@@ -241,6 +245,11 @@ function Devis() {
               <button type="submit" className="btn btn-gold btn-lg submit-btn" disabled={loading}>
                 {loading ? t('devis.sending') : t('devis.submit')}
               </button>
+              {submitError && (
+                <p className="devis-error" role="alert">
+                  {submitError}
+                </p>
+              )}
             </form>
 
             <aside className="devis-sidebar">

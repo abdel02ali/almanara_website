@@ -28,6 +28,7 @@ function Validation() {
     notes: '',
     paymentMethod: 'card'
   })
+  const [orderError, setOrderError] = useState('')
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -36,13 +37,16 @@ function Validation() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setOrderError('')
     if (step < 3) {
       setStep(step + 1)
     } else {
       const result = await createOrder(formData, items)
       if (result.success) {
-      clearCart()
+        clearCart()
         navigate(`/commande/confirmation/${result.orderNumber}`)
+      } else {
+        setOrderError(t('checkout.submitError', 'Nous n’avons pas pu valider votre commande. Veuillez réessayer.'))
       }
     }
   }
@@ -366,6 +370,11 @@ function Validation() {
                 {orderLoading ? t('checkout.processing') : step === 3 ? `${t('checkout.pay')} ${finalTotal.toFixed(2)} DH` : t('checkout.continue')}
               </button>
             </div>
+            {orderError && (
+              <p className="checkout-error" role="alert">
+                {orderError}
+              </p>
+            )}
           </form>
 
           <aside className="order-summary">
