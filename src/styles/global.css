@@ -652,19 +652,6 @@ body.hide-static-links a[data-static-link="true"] {
   display: none !important;
 }
 
-/* Hide placeholder/external links commonly used as static links */
-body.hide-static-links a[href="#"],
-body.hide-static-links a[href^="http://"],
-body.hide-static-links a[href^="https://"] {
-  display: none !important;
-}
-
-/* Keep background images, but hide product-style static cards and their media */
-body.hide-static-images .product-card,
-body.hide-static-images .wedding-item-card,
-body.hide-static-images .wedding-type-card,
-body.hide-static-images .occasions-home-card,
-body.hide-static-images .related-article-card,
-body.hide-static-images .related-card {
+body.hide-static-images [data-static-image="true"] {
   display: none !important;
 }

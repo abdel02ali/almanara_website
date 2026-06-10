@@ -16,7 +16,7 @@ function Mariages() {
     <div className="occasions-page">
       {/* Hero */}
       <header className="occasions-hero">
-        <div className="occasions-hero-bg">
+        <div className="occasions-hero-bg" data-static-image="true">
           <img
             src="/pictures/The-Splendor-of-a-Traditional-Moroccan-Wedding-Celebration-scaled.jpg"
             alt={t('mariages.heroAlt')}
