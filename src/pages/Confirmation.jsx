@@ -71,8 +71,8 @@ function Confirmation() {
         <div className="share-section">
           <p>{t('confirmation.shareExperience')}</p>
           <div className="social-buttons">
-            <a href="#" className="social-btn">Facebook</a>
-            <a href="#" className="social-btn">Instagram</a>
+            <a href="#" className="social-btn" data-static-link="true">Facebook</a>
+            <a href="#" className="social-btn" data-static-link="true">Instagram</a>
           </div>
         </div>
       </div>
