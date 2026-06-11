@@ -67,7 +67,11 @@ function GateauxCategory() {
 
             <div className="gallery-grid">
               {galleryItems.map((item, index) => (
-                <div key={item.id || index} className="gallery-item">
+                <div
+                  key={item.id || index}
+                  className="gallery-item"
+                  data-static-image={data._fromApi ? undefined : 'true'}
+                >
                   <img src={item.image} alt={item.title} loading="lazy" />
                   <div className="gallery-overlay">
                     <h3>{item.title}</h3>
