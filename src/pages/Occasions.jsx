@@ -23,6 +23,7 @@ function Mariages() {
             width="1280"
             height="720"
             fetchPriority="high"
+            data-static-image="true"
           />
           <div className="occasions-hero-overlay"></div>
         </div>

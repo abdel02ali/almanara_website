@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "test:static-display": "node scripts/static-display-selectors.test.mjs",
     "build": "vite build",
     "preview": "vite preview"
   },
