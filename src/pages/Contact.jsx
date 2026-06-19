@@ -212,6 +212,7 @@ function Contact() {
             src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1920&h=400&fit=crop" 
             alt="Carte"
             loading="lazy"
+            data-static-image="true"
           />
           <div className="map-overlay">
             <span>◎</span>

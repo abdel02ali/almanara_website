@@ -23,6 +23,7 @@ function Mariages() {
             width="1280"
             height="720"
             fetchPriority="high"
+            data-static-image="true"
           />
           <div className="occasions-hero-overlay"></div>
         </div>
@@ -57,6 +58,7 @@ function Mariages() {
                   key={type.id}
                   className="wedding-type-card"
                   style={{ animationDelay: `${i * 0.1}s` }}
+                  data-static-image={type._fromApi ? undefined : 'true'}
                 >
                   <div className="wedding-type-image">
                     {type.image && (
