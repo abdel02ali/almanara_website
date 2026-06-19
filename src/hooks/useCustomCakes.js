@@ -94,12 +94,34 @@ const staticCakeDetails = {
   }
 };
 
+function markStaticItems(items) {
+  return items.map(item => ({ ...item, _fromApi: false }));
+}
+
+function markApiItems(items) {
+  return items.map(item => ({ ...item, _fromApi: true }));
+}
+
+function markStaticCakeDetail(detail) {
+  if (!detail) return null;
+  return {
+    ...detail,
+    _fromApi: false,
+    gallery_items: detail.gallery_items?.map(item => ({ ...item, _fromApi: false })) || []
+  };
+}
+
+const staticCakeTypesWithSource = markStaticItems(staticCakeTypes);
+const staticCakeDetailsWithSource = Object.fromEntries(
+  Object.entries(staticCakeDetails).map(([slug, detail]) => [slug, markStaticCakeDetail(detail)])
+);
+
 // ============================================
 // CUSTOM CAKE TYPES (for GateauxSurMesure page)
 // ============================================
 
 export function useCustomCakeTypes() {
-  const [cakeTypes, setCakeTypes] = useState(staticCakeTypes);
+  const [cakeTypes, setCakeTypes] = useState(staticCakeTypesWithSource);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -109,7 +131,7 @@ export function useCustomCakeTypes() {
         const data = await api.getCustomCakeTypes();
         const list = data.results || data;
         if (Array.isArray(list) && list.length > 0) {
-          setCakeTypes(list);
+          setCakeTypes(markApiItems(list));
         }
       } catch (err) {
         console.log('API custom cake types unavailable, using static data');
@@ -159,7 +181,7 @@ export function useProcessSteps() {
 // ============================================
 
 export function useCustomCakeDetail(slug) {
-  const staticData = staticCakeDetails[slug] || null;
+  const staticData = staticCakeDetailsWithSource[slug] || null;
   const [cakeDetail, setCakeDetail] = useState(staticData);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -172,7 +194,7 @@ export function useCustomCakeDetail(slug) {
       try {
         const data = await api.getCustomCakeTypeBySlug(slug);
         if (data && data.title) {
-          setCakeDetail(data);
+          setCakeDetail({ ...data, _fromApi: true });
         }
       } catch (err) {
         console.log(`API custom cake detail unavailable for ${slug}, using static data`);

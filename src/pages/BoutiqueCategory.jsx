@@ -43,7 +43,11 @@ function BoutiqueCategory() {
     <div className="category-page">
       <header className="category-header">
         <div className="category-header-bg">
-          <img src={categoryInfo.image} alt={getCatName(categoryInfo, i18n.language)} />
+          <img
+            src={categoryInfo.image}
+            alt={getCatName(categoryInfo, i18n.language)}
+            data-static-image={categoryInfo._fromApi ? undefined : 'true'}
+          />
           <div className="category-header-overlay"></div>
         </div>
         <div className="container">
@@ -75,7 +79,11 @@ function BoutiqueCategory() {
 
           <div className="products-grid stagger">
             {products.map(product => (
-              <article key={product.slug || product.id} className="product-card card">
+              <article
+                key={product.slug || product.id}
+                className="product-card card"
+                data-static-image={product._fromApi ? undefined : 'true'}
+              >
                 <div className="product-image">
                   <img src={product.image} alt={product.name} loading="lazy" />
                   {product.badge && (
@@ -129,6 +137,7 @@ function BoutiqueCategory() {
                   key={cat.slug || cat.id}
                   to={`/boutique/${cat.slug || cat.id}`}
                   className="related-card"
+                  data-static-image={cat._fromApi ? undefined : 'true'}
                 >
                   <img src={cat.image} alt={getCatName(cat, i18n.language)} loading="lazy" />
                   <div className="related-overlay"></div>

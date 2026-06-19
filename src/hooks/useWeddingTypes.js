@@ -56,12 +56,22 @@ const staticWeddingTypes = [
   }
 ];
 
+function markStaticItems(items) {
+  return items.map(item => ({ ...item, _fromApi: false }));
+}
+
+function markApiItems(items) {
+  return items.map(item => ({ ...item, _fromApi: true }));
+}
+
+const staticWeddingTypesWithSource = markStaticItems(staticWeddingTypes);
+
 // ============================================
 // WEDDING TYPES HOOK
 // ============================================
 
 export function useWeddingTypes() {
-  const [weddingTypes, setWeddingTypes] = useState(staticWeddingTypes);
+  const [weddingTypes, setWeddingTypes] = useState(staticWeddingTypesWithSource);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -71,7 +81,7 @@ export function useWeddingTypes() {
         const data = await api.getWeddingTypes();
         const list = data.results || data;
         if (Array.isArray(list) && list.length > 0) {
-          setWeddingTypes(list);
+          setWeddingTypes(markApiItems(list));
         }
       } catch (err) {
         console.log('API wedding types unavailable, using static data');
@@ -101,7 +111,7 @@ export function useWeddingCategories() {
         const data = await api.getWeddingCategories();
         const list = data.results || data;
         if (Array.isArray(list) && list.length > 0) {
-          setCategories(list);
+          setCategories(markApiItems(list));
         }
       } catch (err) {
         console.log('API wedding categories unavailable');

@@ -11,6 +11,14 @@ let _apiProductsCache = null;
 let _cacheTime = 0;
 const CACHE_TTL = 30000; // 30 seconds
 
+function markStaticItems(items) {
+  return items.map(item => ({ ...item, _fromApi: false }));
+}
+
+const staticProductsWithSource = markStaticItems(staticProducts);
+const staticCategoriesWithSource = markStaticItems(staticCategories);
+const getStaticFeaturedWithSource = () => markStaticItems(getStaticFeatured());
+
 function isCacheValid() {
   return Date.now() - _cacheTime < CACHE_TTL;
 }
@@ -28,9 +36,9 @@ async function fetchAllApiCategories() {
     // Handle paginated response (DRF wraps in {count, results})
     const list = data.results || data;
     if (list && Array.isArray(list) && list.length > 0) {
-      _apiCategoriesCache = list;
+      _apiCategoriesCache = list.map(c => ({ ...c, _fromApi: true }));
       _cacheTime = Date.now();
-      return list;
+      return _apiCategoriesCache;
     }
   } catch (err) {
     console.log('API categories unavailable');
@@ -79,7 +87,7 @@ function mergeItems(apiItems, staticItems) {
 // ============================================
 
 export function useCategories() {
-  const [categories, setCategories] = useState(staticCategories);
+  const [categories, setCategories] = useState(staticCategoriesWithSource);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -88,7 +96,7 @@ export function useCategories() {
       try {
         const apiCategories = await fetchAllApiCategories();
         if (apiCategories.length > 0) {
-          setCategories(mergeItems(apiCategories, staticCategories));
+          setCategories(mergeItems(apiCategories, staticCategoriesWithSource));
         }
       } catch (err) {
         setError(err);
@@ -107,7 +115,7 @@ export function useCategories() {
 // ============================================
 
 export function useProducts(params = {}) {
-  const [products, setProducts] = useState(staticProducts);
+  const [products, setProducts] = useState(staticProductsWithSource);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -117,7 +125,7 @@ export function useProducts(params = {}) {
       try {
         const apiProducts = await fetchAllApiProducts();
         if (apiProducts.length > 0) {
-          let merged = mergeItems(apiProducts, staticProducts);
+          let merged = mergeItems(apiProducts, staticProductsWithSource);
           
           if (params.category) {
             merged = merged.filter(p => 
@@ -127,17 +135,17 @@ export function useProducts(params = {}) {
           }
           setProducts(merged);
         } else {
-          let filtered = staticProducts;
+          let filtered = staticProductsWithSource;
           if (params.category) {
-            filtered = staticProducts.filter(p => p.category === params.category);
+            filtered = staticProductsWithSource.filter(p => p.category === params.category);
           }
           setProducts(filtered);
         }
       } catch (err) {
         setError(err);
-        let filtered = staticProducts;
+        let filtered = staticProductsWithSource;
         if (params.category) {
-          filtered = staticProducts.filter(p => p.category === params.category);
+          filtered = staticProductsWithSource.filter(p => p.category === params.category);
         }
         setProducts(filtered);
       } finally {
@@ -155,7 +163,7 @@ export function useProducts(params = {}) {
 // ============================================
 
 export function useFeaturedProducts() {
-  const [products, setProducts] = useState(getStaticFeatured());
+  const [products, setProducts] = useState(getStaticFeaturedWithSource());
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -169,7 +177,7 @@ export function useFeaturedProducts() {
             category: p.category_slug || p.category,
             _fromApi: true
           }));
-          setProducts(mergeItems(apiProducts, getStaticFeatured()));
+          setProducts(mergeItems(apiProducts, getStaticFeaturedWithSource()));
         }
       } catch (err) {
         setError(err);
@@ -198,9 +206,9 @@ export function useProduct(slug) {
       setLoading(true);
       try {
         const data = await api.getProductBySlug(slug);
-        setProduct(data);
+        setProduct(data ? { ...data, _fromApi: true } : data);
       } catch (err) {
-        const staticProduct = staticProducts.find(p => p.id === slug || p.slug === slug);
+        const staticProduct = staticProductsWithSource.find(p => p.id === slug || p.slug === slug);
         setProduct(staticProduct || null);
         setError(err);
       } finally {
@@ -222,10 +230,10 @@ export function useCategoryProducts(categorySlug) {
   const normalizedCategorySlug = String(categorySlug);
 
   // Find static category and products
-  const staticCategory = staticCategories.find(c =>
+  const staticCategory = staticCategoriesWithSource.find(c =>
     String(c.id) === normalizedCategorySlug || String(c.slug) === normalizedCategorySlug
   );
-  const staticCategoryProducts = staticProducts.filter(
+  const staticCategoryProducts = staticProductsWithSource.filter(
     p => String(p.category) === normalizedCategorySlug
   );
 

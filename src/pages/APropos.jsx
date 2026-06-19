@@ -19,6 +19,7 @@ function APropos() {
           <img 
             src="https://images.unsplash.com/photo-1556217477-d325251ece38?w=1920&h=800&fit=crop" 
             alt="Notre boulangerie" 
+            data-static-image="true"
           />
           <div className="apropos-hero-overlay"></div>
         </div>
@@ -45,11 +46,13 @@ function APropos() {
                 src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=500&h=600&fit=crop" 
                 alt="Pain artisanal" 
                 className="story-img-1"
+                data-static-image="true"
               />
               <img 
                 src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&h=300&fit=crop" 
                 alt="Nos créations" 
                 className="story-img-2"
+                data-static-image="true"
               />
             </div>
           </div>
