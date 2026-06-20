@@ -63,6 +63,15 @@
   width: 100%;
 }
 
+.devis-form .form-error {
+  color: var(--color-rose-gold);
+  font-size: 0.9rem;
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  background: rgba(183, 110, 121, 0.1);
+  border-left: 2px solid var(--color-rose-gold);
+}
+
 /* Sidebar */
 .devis-sidebar {
   display: flex;

@@ -39,15 +39,11 @@ export function useCreateOrder() {
       setLoading(false);
       return { success: true, orderNumber: result.order_number };
     } catch (err) {
-      // If API fails, generate a local order number
-      console.log('API unavailable, generating local order number');
       setError(err);
       setLoading(false);
-      // Return a simulated successful order with local ID
       return { 
-        success: true, 
-        orderNumber: `CMD-${Date.now()}`,
-        isOffline: true 
+        success: false,
+        error: err
       };
     }
   };
@@ -112,14 +108,11 @@ export function useSubmitDevis() {
       setLoading(false);
       return { success: true, referenceNumber: result.reference_number };
     } catch (err) {
-      // If API fails, generate a local reference
-      console.log('API unavailable, generating local reference');
       setError(err);
       setLoading(false);
       return { 
-        success: true, 
-        referenceNumber: `DEV-${Date.now()}`,
-        isOffline: true 
+        success: false,
+        error: err
       };
     }
   };
