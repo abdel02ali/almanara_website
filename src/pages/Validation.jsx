@@ -11,7 +11,7 @@ function Validation() {
   const navigate = useNavigate()
   const { items, total, clearCart } = useCart()
   const { isAuthenticated, user } = useAuth()
-  const { createOrder, loading: orderLoading } = useCreateOrder()
+  const { createOrder, loading: orderLoading, error: orderError } = useCreateOrder()
   
   const [step, setStep] = useState(1)
   const [formData, setFormData] = useState({
@@ -41,7 +41,7 @@ function Validation() {
     } else {
       const result = await createOrder(formData, items)
       if (result.success) {
-      clearCart()
+        clearCart()
         navigate(`/commande/confirmation/${result.orderNumber}`)
       }
     }
@@ -350,6 +350,12 @@ function Validation() {
                   <p>{t('checkout.securePayment')}</p>
                 </div>
               </div>
+            )}
+
+            {orderError && (
+              <p className="form-error" role="alert">
+                {t('checkout.submitError', "Impossible d'enregistrer votre commande pour le moment. Veuillez reessayer.")}
+              </p>
             )}
 
             <div className="checkout-actions">
