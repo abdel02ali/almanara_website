@@ -48,6 +48,7 @@ function GateauxSurMesure() {
                   key={type.id}
                   to={`/gateaux/${type.slug || type.id}`}
                   className="cake-type-card"
+                  data-static-image={type._fromApi ? undefined : 'true'}
                 >
                   <div className="cake-type-image">
                     <img src={type.image} alt={type.title} loading="lazy" />
