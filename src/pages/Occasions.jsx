@@ -56,6 +56,7 @@ function Mariages() {
                 <div
                   key={type.id}
                   className="wedding-type-card"
+                  data-static-image={type._fromApi ? undefined : 'true'}
                   style={{ animationDelay: `${i * 0.1}s` }}
                 >
                   <div className="wedding-type-image">
@@ -136,6 +137,7 @@ function Mariages() {
                           <div
                             key={item.id}
                             className="wedding-item-card"
+                            data-static-image={item._fromApi ? undefined : 'true'}
                             style={{ animationDelay: `${i * 0.08}s` }}
                           >
                             <div className="wedding-item-image">
