@@ -75,7 +75,11 @@ function BoutiqueCategory() {
 
           <div className="products-grid stagger">
             {products.map(product => (
-              <article key={product.slug || product.id} className="product-card card">
+              <article
+                key={product.slug || product.id}
+                className="product-card card"
+                data-static-image={product._fromApi ? undefined : 'true'}
+              >
                 <div className="product-image">
                   <img src={product.image} alt={product.name} loading="lazy" />
                   {product.badge && (
